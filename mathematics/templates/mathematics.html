@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/mathematics.css' %}">
+    <title>Mathematics</title>
+</head>
+<body>
+    <div class="breadcrumbs">
+      <a href="/">Home</a>
+      <span>></span>
+      <span class="current-page">Projects</span>
+    </div>
+    <h1>Interactive Exploration of Math Concepts</h1>
+    <div id="projects">
+	<a href="{% url 'archimedes-approximation' %}">
+	    <div id="area-of-circle">
+		<p class="title">Archimedes' Method of Calculating the Area of a Circle.</p>
+		<div class="image-container">
+		    <img src="{% static 'images/inscribed_octagon.png' %}" alt="Circle with inscribed octagon." id="polygon">
+		</div>
+		<p class="description">
+		    This project explores finding the area of a circle <br>
+		    using a method similar to one used by Archimedes over 2000 years ago.<br><br>
+
+		    Archimedes used regular polygons&mdash;both inscribed and circumscribed&mdash;<br>
+		    to prove that the area of a circle must be &pi; r<sup>2</sup>. <br><br>
+		    
+		    We will use inscribed regular polygons with up to 30 sides <br>
+		    to approximate the area of a circle.<br><br>
+		    
+		    A more modern method&mdash;using limits&mdash;is then used to prove that <br>
+		    the exact area of a circle must be &pi; r<sup>2</sup>.
+		</p>
+	    </div>
+	</a>
+
+	<a href="{% url 'combinatorics' %}">
+	    <div id="probability-project">
+		<p class="title">Combinatorics</p>
+		<div class="image-container" id="image-container-probability">
+		    <span class="card-suit" style="color: black">&clubs;</span>
+		    <span class="card-suit" id="diamond" style="color: red">&diams;</span>
+		    <span class="card-suit" style="color: red">&hearts;</span>
+		    <span class="card-suit" style="color: black">&spades;</span>
+		</div>
+		<p class="description">
+		We will use two different methods to<br>
+		calculate the probability of a <br>
+		pair, two pair, and three-of-a-kind<br>
+		in 5-card poker.<br><br>
+
+		The first method will calculate<br>
+		the probability by experiment.<br>
+		By considering a large number of 5-card hands<br>
+		we will be able to closely approximate the<br>
+		theoretical probability of the hands <br>under consideration.<br><br>
+
+
+		The second method will use theoretical ideas<br>
+		to calculate the probability exactly.
+
+
+		</p>
+	    </div>
+	<a>
+
+    </div>
+

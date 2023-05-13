@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/combinatorics.css' %}">
+    <title>Poker Hands</title>
+</head>
+<body>
+    <h1 class="text-center" id="poker-hand-title">Poker Hands &mdash; Probabilities</h1>
+    <div id="poker-hand-grid">
+	<div id="experiment-controls">
+	    <p id="intro-text">
+		This experiment randomly generates n 5-card poker hands, where n is the number of trials.<br>
+		The experimental probability of the selected hand will be calculated 
+		based on the hands generated.<br><br>
+		The higher the number of trials, the closer the experimental probability will be
+		to the theoretical probability.
+		
+	    </p>
+	    <label for="select-hand">Select a Hand:</label><br>
+	    <select name="select-hand" id="select-hand">
+	      <option value="pair">Pair</option>
+	      <option value="two-pair">Two Pair</option>
+	      <option value="three-of-a-kind">Three of a Kind</option>
+	    </select><br><br><br>
+	    <label for="num-trials">Number of Trials (1-50,000): </label><br>
+	    <input type="text" id="num-trials" name="num-trials"><br>
+	    <div id="error-message">
+	    </div><br>
+	    <div style="margin-left: 100px">
+		<button class="button" id="trials-button">Submit</button>
+	    </div>
+	</div>
+    </div>
+    <canvas id="bar-chart"></canvas>
+    <div class="no-display" id="poker-display-controls">
+	<button class="button" id="prev-button">Previous</button>
+	<div>
+	    <label for="page-number" id="page-number-label"></label><br>
+	    <input type="text" id="page-number" name="page-number"><br>
+	</div>
+	<button class="button" id="next-button">Next</button>
+    </div>
+    <p id="current-page"></p>
+    <div id="display-hands">
+    </div>
+<script src="{% static 'js/poker_hands.js' %}" defer></script>
+</body>
+</html>

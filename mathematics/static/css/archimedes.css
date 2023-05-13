@@ -1,0 +1,201 @@
+#main-content {
+    display: grid;
+    grid-template-rows: 1fr 6fr 2fr;
+    grid-template-columns: 1fr;
+    width: 100vw;
+    height: 100%;
+}
+
+body {
+    margin: 0px 0px;
+    height: 100vh;
+}
+
+label {
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: white;
+}
+
+.breadcrumbs { 
+    background: rgb(0, 0, 110);
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0px 0px;
+    padding: 2px 2px;
+}
+
+.breadcrumbs a , .separator {
+    color: lightgray;
+}
+.current-page { 
+    color: rgb(190, 190, 190);
+}
+
+#polygon-controls {
+    display: flex;
+    justify-content: center;
+    grid-row: 1 / span 1;
+    border-bottom: 2px solid cyan;
+    border-top: 2px solid black;
+    background: darkslategray;
+    padding-bottom: 20px;
+}
+
+.first-column {
+    margin-left: 15px;
+}
+
+#number-sides {
+    width: 90px;
+    height: 1.4rem;
+    margin-top: 8px;
+}
+
+#calculate-area {
+    height: 1.4rem;
+    width: 120px;
+    margin-top: 15px;
+    margin-right: 10px;
+    color: black;
+    background: (225, 225, 225);
+}
+
+#play-demonstration {
+    width: 75px;
+    margin-left: 5vw; 
+}
+
+#skip-demonstration {
+    display: none;
+    width: 75px;
+    margin-left: 5vw; 
+    margin-top: 5vh;
+}
+
+#canvas-container {
+    grid-row: 2 / span 1;
+    background: linear-gradient(black, darkslategray);
+    border-right: cyan;
+    position: relative;
+    height: 300px;
+}
+
+#canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#display-area {
+    position: absolute;
+    width: 100%;
+    left: 0%;
+    top: 90%;
+    color: white;
+    text-align: center;
+}
+
+#area-derivation {
+    grid-row: 3 / span 1;
+    background: linear-gradient(to top, black, darkslategray);
+    border-top: 2px solid cyan;
+    padding-left: 10px;
+}
+
+#area-text {
+    opacity: 0;
+    height: 100vh;
+    width: 100%;
+    color: white;
+    margin-top: 25px;
+    margin-right: 10px;	
+    overflow-y: scroll;
+}
+
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    from {
+	opacity: 0;
+    }
+    to {
+	opacity: 1;
+    }
+}
+
+
+@media screen and (min-width: 600px) {
+    #canvas-container {
+	height: 550px;
+    }
+    
+    #calculate-area {
+	height: 1.4rem;
+	width: 175px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    #main-content {
+	display: grid;
+	grid-template-rows: 6fr 2fr;
+	grid-template-columns: 1fr 6fr;
+	width: 100vw;
+	height: 100%;
+    }
+    
+    #polygon-controls {
+	display: block;
+	grid-column: 1 / span 1;
+	grid-row: 1 / span 2;
+    }
+
+    #demonstration {
+	margin-top: 15vh;
+	margin-left: 15px;
+    }
+	
+    #canvas-container {
+	grid-column: 2 / span 1;
+	grid-row: 1 / span 1;
+    }
+
+    #area-derivation {
+	grid-column: 2 / span 1;
+	grid-row: 2 / span 1;
+	padding-left: 20px;
+	padding-top: 30px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #main-content {
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 4fr 2fr;
+    }
+    
+    #polygon-controls {
+	grid-column: 1 / span 1;
+    }
+	
+    #canvas-container {
+	grid-column: 2 / span 1;
+	height: 100%;
+    }
+
+    #area-derivation {
+	grid-column: 3 / span 1;
+	grid-row: 1 / span 1;
+	background: linear-gradient(black, darkslategray);
+	border-left: 2px solid cyan;
+	border-top: none;
+    }
+}

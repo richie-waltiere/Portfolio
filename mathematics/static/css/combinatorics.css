@@ -1,0 +1,250 @@
+h3 {
+    border-top: 1px solid black;
+    padding-top: 1.5vh;
+}
+
+body {
+    background: rgb(245, 255, 255);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.no-display {
+    display: none;
+}
+
+.top-margin {
+    margin-top: 1.5vh;
+}
+
+.top-border {
+    border-top: 2px solid black;
+}
+
+.definition {
+    border: 2px solid black;
+    background: rgb(210, 255, 232);
+    color: black;
+    padding: 1vw;
+}
+
+.button {
+    width: 80px;
+    height: 22px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: end;
+    margin: 2vw;
+    padding-right: 5vw;
+}
+
+.response {
+    font-size: 1.5rem;
+    margin-bottom: 1.5vh;
+    border: 1px solid black;
+    background: teal;
+}
+
+#sock-image {
+    width: 100%; 
+    margin-top: 2vh;
+}
+
+#cup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 4px;
+}
+
+.cup {
+    width: 30vw;
+    height: 10vh;
+    border: 2px solid black;
+}
+
+#card-probabilities {
+    border-top: 2px solid black;
+    margin-top: 2.5vh;
+}
+
+#pair-q2, #pair-q3 {
+    border-top: 2px solid black;
+    margin-top: 2.5vh;
+    padding-top: 2vh;
+}
+
+#poker-hand-title {
+    width: 80vw;
+    font-size: 1.3rem;
+}
+
+#intro-text {
+    width: 80vw;
+}
+
+#experiment-controls {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#bar-chart {
+    max-width: 500px;
+    max-height: 250px;
+}
+
+#display-hands {
+    width: 100%;
+    height: 50vh;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+#page-number {
+    width: 100px;
+}
+
+#poker-display-controls {
+    justify-content: space-between;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+    align-items: end;
+}
+
+#current-page {
+    margin-bottom: 0px;
+    margin-top: 2px;
+    text-align: right;
+    font-family: Courier, monospace;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 400px) {
+    #sock-image {
+	width: 70vw; 
+	margin-top: 2vh;
+    }
+
+    #poker-hand-title {
+	width: 65vw;
+    }
+
+    #intro-text {
+	width: 65vw;
+    }
+
+    #page-number {
+	width: 150px;
+    }
+    
+}
+
+@media screen and (min-width: 640px) {
+    #sock-image {
+	width: 50vw; 
+	margin-top: 2vh;
+    }
+
+    .cup {
+	width: 17vw;
+	height: 10vh;
+	border: 2px solid black;
+    }
+
+    #cup-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 2fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-gap: 4px;
+    }
+
+    .button-container {
+	justify-content: start;
+    }
+
+    #poker-hand-title {
+	width: 65vw;
+    }
+
+    #intro-text {
+	width: 65vw;
+    }
+
+    #page-number {
+	width: 200px;
+    }
+
+    #bar-chart {
+	margin-left: 10vw;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    #sock-image {
+	width: 40vw; 
+	margin-top: 2vh;
+    }
+
+    .cup {
+	width: 15vw;
+	height: 10vh;
+	border: 2px solid black;
+    }
+
+    #cup-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 3fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-gap: 4px;
+    }
+
+    .button-container {
+	justify-content: start;
+	margin-left: 1vw;
+    }
+
+    #bar-chart {
+	margin-left: 20vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #sock-image {
+	width: 35vw; 
+	margin-top: 2vh;
+    }
+
+    .cup {
+	width: 10vw;
+	height: 10vh;
+	border: 2px solid black;
+    }
+
+    #cup-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 6fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-gap: 4px;
+    }
+
+    .button-container {
+	justify-content: start;
+	margin-left: 1vw;
+    }
+
+    #bar-chart {
+	margin-left: 30vw;
+    }
+}

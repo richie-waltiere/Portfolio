@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/archimedes.css' %}">
+    <title>Mathematics</title>
+</head>
+<body>
+    <div class="breadcrumbs">
+      <a href="/">Home</a>
+      <span class="separator">></span>
+      <a href="{% url 'mathematics' %}">Projects</a>
+      <span class="separator">></span>
+      <span class="current-page">Area Approximation</span>
+    </div>
+    <div id="main-content">
+	<div id="polygon-controls">
+	    <div id="select-polygon">
+		<label for="number-sides">Number of Sides: </label><br>
+		<select class="first-column" id="number-sides">
+		  <option value="3">3 sides</option>
+		  <option value="4">4 sides</option>
+		  <option value="5">5 sides</option>
+		  <option value="6">6 sides</option>
+		  <option value="7">7 sides</option>
+		  <option value="8">8 sides</option>
+		  <option value="9">9 sides</option>
+		  <option value="10">10 sides</option>
+		  <option value="11">11 sides</option>
+		  <option value="12">12 sides</option>
+		  <option value="15">15 sides</option>
+		  <option value="20">20 sides</option>
+		  <option value="25">25 sides</option>
+		  <option value="30">30 sides</option>
+		</select><br>
+		<button class="first-column" id="calculate-area">Calculate Area</button>
+	    </div>
+	    <div class="first-column" id="demonstration">
+		<p style="color: white">Full Demonstration:</p>
+		<button id="play-demonstration">Play</button>
+		<button id="skip-demonstration">Skip</button>
+	    </div>
+	</div>
+	<div id="canvas-container">
+	    <canvas id="canvas">
+	    </canvas>
+	    <div id="display-area">
+	    </div>
+	</div>
+	<div id="area-derivation">
+	    <p id="area-text">
+		<span id="intro"> Assume the circle has a radius of 4 inches. <br><br></span>
+		<span id="add-text" style="display: none">
+		</span>
+	    </p>
+	</div>
+    </div>
+<script src="{% static 'js/archimedes.js' %}" defer></script>
+</body>
+</html>

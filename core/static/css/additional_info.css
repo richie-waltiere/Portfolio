@@ -1,0 +1,62 @@
+body {
+    background-image: linear-gradient(to right, rgb(0,210, 210), rgb(20, 230, 230));
+    color: rgb(20,20,20);
+}
+
+h1 {
+    color: rgb(20, 20, 20);
+}
+
+h2 {
+    color: rgb(30, 30, 130)
+}
+
+h3 {
+    color: rgb(0, 0, 100);
+}
+
+img {
+    padding: 10px;
+    width: 150px;
+    height: 300px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    border: 2px solid black;
+    margin-left: 3vw;
+}
+
+#tutoring-text {
+    padding: 10px;
+    border-right: 2px solid black;
+}
+
+
+
+@media screen and (min-width: 640px) {
+    .image-container {
+	width: 85%;
+    }
+
+}
+
+@media screen and (min-width: 800px) {
+    .image-container {
+	width: 70%;
+	margin-left: 8vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    body {
+	margin-right: 30vw;
+    }
+}
+
+

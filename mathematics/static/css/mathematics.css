@@ -1,0 +1,155 @@
+body {
+    background: rgb(15,188,200);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(15,15,15);
+    margin-bottom: 2vh;
+}
+
+.title-image {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+#projects {
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    grid-gap: 10px;
+    align-items: center;
+    justify-content: start;
+    height: 90vh;
+}
+
+#area-of-circle {
+    grid-row: 1 / span 1;
+    border: 3px solid dimgray;
+    background: linear-gradient(black, darkslategray);
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    margin-right: 1vw;
+}
+
+#area-of-circle:hover {
+    border: 3px solid cyan;
+}
+
+.image-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+#polygon {
+    width: 50%;
+    height: 50%;
+}
+
+#image-container-probability {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0
+}
+
+.card-suit {
+    font-size: 3rem;
+    background: azure;
+    border: 3.5px solid rgb(70,70,70);
+    padding: 0 8px;
+}
+
+#diamond {
+    padding: 0 11px;
+}
+
+.description {
+    margin-top: 5vh;
+    font-size: 1.1rem;
+}
+
+#probability-project {
+    grid-row: 2 / span 1;
+    background: linear-gradient(rgb(0, 0, 118), rgb(0, 0, 138));
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: cursive;
+    border: 3px solid black;
+}
+
+#probability-project:hover {
+    border: 3px solid gold;
+}
+
+.title {
+    margin-top: 5vh;
+    text-align: center;
+    font-size: 1.2rem;
+    text-decoration: underline;
+}
+
+#projects a {
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+    .card-suit {
+	font-size: 4rem;
+    }
+
+    #image-container-probability {
+	width: 75%;
+    }
+
+    #polygon {
+	width: 40%;
+	height: 40%;
+    }
+}
+@media screen and (min-width: 640px) {
+    .card-suit {
+	font-size: 4.5rem;
+    }
+
+    #image-container-probability {
+	width: 50%;
+    }
+
+    #polygon {
+	width: 27%;
+	height: 27%;
+    }
+
+@media screen and (min-width: 960px) {
+    #projects {
+	display: grid;
+	grid-template-columns: 1fr 1fr; 
+	grid-template-rows: 1fr; 
+    }
+
+    #image-container-probability {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0
+    }
+
+    #image-container-probability {
+	width: 60%;
+    }
+}
