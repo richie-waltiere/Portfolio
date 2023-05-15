@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/combinatorics.css' %}">
     <title>Combinatorics</title>
 </head>
+<!-- This project explores two concepts in combinatorics: the pigeonhole principle and -->
+<!-- the probability of drawing a given 5-card poker hand -->
 <body>
     <div class="breadcrumbs">
       <a href="/">Home</a>
@@ -17,6 +19,7 @@
       <span class="separator">></span>
       <span class="current-page">Combinatorics</span>
     </div>
+
     <h1 class="text-center">Combinatorics</h1>
     <div id="pigeonhole-principle">
 	<p>
@@ -56,14 +59,27 @@
 	    If there are n items and m containers, with n &gt; m, then at least one container contains two items.
 	</div>
 	<div class="no-display top-margin" id="find-match-explanation">
-	    Suppose we have 2 containers, one labeled black and the other white. When we pull a black sock from the drawer, it will go in the container labeled black and a white sock will go into the container labeled white. <br><br>Suppose further that the first selection is black and the second is white. Each container now contains a sock. If the third selection is black, we have two black socks and one container (black), forcing a pair in that container. A white sock would also force a pair in the white container.<br>
+	    Suppose we have 2 containers, one labeled black and the other white. 
+	    When we pull a black sock from the drawer, it will go in the container labeled black 
+	    and a white sock will go into the container labeled white. <br><br>
+	    Suppose further that the first selection is black and the second is white. 
+	    Each container now contains a sock. If the third selection is black, 
+	    we have two black socks and one container (black), forcing a pair in that container. 
+	    A white sock would also force a pair in the white container.<br>
 	    <img src="{% static 'images/find_match.png' %}" alt="Two Black Socks, One White." id="sock-image" >
 	</div>
 	<h3>Example 2:</h3>
 	<p>
-	    Eddy is in a room with 13 co-workers. Having recently learned the pigeonhole principle, he smugly informs one of them, Benjamin, that at least one of his co-workers must share the same birthday month as himself &mdash; February.<br><br>
-	    Benjamin kindly informs him that he is mistaken. Eddy chuckles at the ignorance of his co-worker and light-heartedly calls everyone over. He takes a poll of all thirteen of his coworkers. One by one they list their birthday months, and to his growing dismay, not one of them was born in February. <br><br>
-	    Red-faced and defeated, Eddy sulks over to a corner of the room. <em>What happened?</em> <span class="text-italic">Why had the pigeonhole principle failed him?</span> <br><br>
+	    Eddy is in a room with 13 co-workers. Having recently learned the pigeonhole principle, 
+	    he smugly informs one of them, Benjamin, that at least one of his co-workers must share the same 
+	    birthday month as himself &mdash; February.<br><br>
+	    Benjamin kindly informs him that he is mistaken. Eddy chuckles at the ignorance of his co-worker 
+	    and light-heartedly calls everyone over. He takes a poll of all thirteen of his coworkers. 
+	    One by one they list their birthday months, and to his growing dismay, 
+	    not one of them was born in February. <br><br>
+	    Red-faced and defeated, Eddy sulks over to a corner of the room. 
+	    <em>What happened?</em> 
+	    <span class="text-italic">Why had the pigeonhole principle failed him?</span> <br><br>
 	</p>
 	<label>
 	    <input type="radio" name="birthmonth" value="a">
@@ -81,17 +97,23 @@
 	    <input type="radio" name="birthmonth" value="d">
 	    The pigeonhole principle guarantees that <em>someone</em> will share a birth month with another coworker, but the specific person and month cannot be determined beforehand.
 	</label><br><br>
-
 	<div class="button-container">
 	    <button class="button" id="birthmonth-button">Submit</button>
 	</div>
 	<div class="response no-display text-center" id="birthmonth-response">
 	</div>
 	<div class="no-display" id="birthmonth-explanation">
-	    Benjamin walks over the cabinet, pulls out 12 coffee cups and thirteen spoons and places them in front of Eddy. <br><br>
-	    "That's a common mistake. See these coffee cups? If each of these cups represents a different month of the year and each of these spoons represents one of the people in this room, then we can place a spoon in a given cup if that person was born in the month represented by the cup. <br><br>
-	    For arguments sake, suppose everyone except me has a different birth month. That means one spoon will be distributed to each cup. My birthday is in October. The October cup will be the only one that contains two spoons. February&mdash;your birth month&mdash;still contains you alone. Make sense?"<br><br>
-	Eddy nodded slightly and grumbled something about it being Tuesday today and not Monday.<br>
+	    Benjamin walks over the cabinet, pulls out 12 coffee cups and thirteen spoons and 
+	    places them in front of Eddy. <br><br>
+	    "That's a common mistake. See these coffee cups? If each of these cups represents a different 
+	    month of the year and each of these spoons represents one of the people in this room, 
+	    then we can place a spoon in a given cup if that person was born 
+	    in the month represented by the cup. <br><br>
+	    For arguments sake, suppose everyone except me has a different birth month. 
+	    That means one spoon will be distributed to each cup. My birthday is in October. 
+	    The October cup will be the only one that contains two spoons. 
+	    February&mdash;your birth month&mdash;still contains you alone. Make sense?"<br><br>
+	    Eddy nodded slightly and grumbled something about it being Tuesday today and not Monday.<br>
 	</div>
 	<div class="top-margin" id="cup-grid" style="display: none">
 	    <img src="{% static 'images/cup_pictures/coffee_cup_january.png' %}" alt="" class="cup";>
@@ -108,31 +130,38 @@
 	    <img src="{% static 'images/cup_pictures/coffee_cup_december.png' %}" alt="" class="cup";>
 	</div>
     </div>
+
     <div id="poker-probabilities">
 	<h3>Poker Probabilities</h3>
 	<p>
-	Let's move on to a more challenging topic&mdash;calculating the probability of some of the hands in a poker game. <br><br>
-	Experiment with these probabilities &rarr; <a href="{% url 'poker-hands' %}" target="_blank">here</a> &larr; before continuing.<br><br>
-	We'll use a standard 52-card deck (no Jokers).<br>Here are a few more concepts we'll need to analyze these problems completely: 
+	    Let's move on to a more challenging topic&mdash;calculating the probability of some of the hands 
+	    in a poker game. <br><br>
+	    Experiment with these probabilities &rarr; 
+	    <a href="{% url 'poker-hands' %}" target="_blank">here</a> &larr; before continuing.<br><br>
+	    We'll use a standard 52-card deck (no Jokers).<br>
+	    Here are a few more concepts we'll need to analyze these problems completely: 
 	</p>
 	<div class="definition">
 	    <strong style="text-decoration: underline">Combinations</strong><br>
 	    The number of possible ways to choose k items from a group of size n is given by the equation:<br><br>
 	    C(n,k) = n!/((n-k)!*k!)<br><br>
-	    where C(n,k) is read as "n choose k"&mdash;the number of unique combinations possible if items are chosen k at a time from a group of size n&mdash;and n! = n*(n-1)*(n-2)...*2*1 is is read "n factorial" (e.g. 5! = 5*4*3*2*1 = 120).<br><br>
+	    where C(n,k) is read as "n choose k"&mdash;the number of unique combinations possible 
+	    if items are chosen k at a time from a group of size n&mdash;and n! = n*(n-1)*(n-2)...*2*1 
+	    is read "n factorial" (e.g. 5! = 5*4*3*2*1 = 120).<br><br>
 	    The order of the items does not matter in a combination:<br> 
 	    {1,2,3} is the same as {3,2,1}<br><br>
 	    <strong style="text-decoration: underline">Multiplication Principle</strong><br>
 	    The multiplication principle states:<br><br>
-	    If there are N<sub>1</sub> items in set 1 and N<sub>2</sub> items in set 2, then there are N<sub>1</sub>* N<sub>2</sub> ways to combine the items from set 1 and set 2. <br><br>
-	    (e.g. given 3 subjects, 4 verbs, and 8 predicates, there are 3 * 4 * 8 = 96 unique sentences that can be formed, assuming only one sentence part can be chosen from each category for any given sentence.)
+	    If there are N<sub>1</sub> items in set 1 and N<sub>2</sub> items in set 2, 
+	    then there are N<sub>1</sub>* N<sub>2</sub> ways to combine the items from set 1 and set 2. <br><br>
+	    (e.g. given 3 subjects, 4 verbs, and 8 predicates, there are 3 * 4 * 8 = 96 unique sentences 
+	    that can be formed, assuming only one sentence part can be chosen from each category 
+	    for any given sentence.)
 	</div>
 	<p>
 	    The number of possible 5-card hands is given by the equation:<br><br>
 	    C(52,5) = 52!/(47!*5!) = <strong>2,598,960</strong> poker hands <br><br>
 	    This number is important and will be used in most of our calculations.
-	</p>
-	<p>
 	</p>
 	<h3>Calculating the Probability of a Pair</h3>
 	<div id="pair-q1">
@@ -162,9 +191,11 @@
 	</div>
 	<div class="no-display" id="pair-q1-explanation">
 	    For any given card value, there are four suits. These suits can be paired up in C(4,2) = 6 ways.<br><br>
-	    There are 13 card values; each of these has 6 possible pairs. The total number of pairs possible in a 52-card deck is:<br><br>
+	    There are 13 card values; each of these has 6 possible pairs. The total number 
+	    of pairs possible in a 52-card deck is:<br><br>
 	    C(4,2) * C(13,1) = 6 * 13 = 78 pairs<br>
 	</div>
+	
 	<div class="top-margin" id="pair-q2">
 	    <strong>Part 2</strong><br>
 	    If a given pair has already been chosen, how many combinations of the other three cards are possible?<br>
@@ -194,11 +225,15 @@
 	<div class="no-display" id="pair-q2-explanation">
 	    Since a three-of-a-kind is not allowed, the other two cards of the same value as the pair cannot be used. 
 	    That leaves 12 remaining card values.<br><br>
-	    There are C(12,3) ways to choose 3 (unique) values from the 12. Each of these values has 4 possible suits. This multiplies every combination of 3 card-values by 4*4*4 = 64 (multiplication principle). For example, {3, J, K} is not one combination but 64, corresponding to { {3 Spades, J Spades, K Spades}, {3 Spades, J Spades, K Hearts}, ... }.<br><br> 
+	    There are C(12,3) ways to choose 3 (unique) values from the 12. 
+	    Each of these values has 4 possible suits. This multiplies every combination of 
+	    3 card-values by 4*4*4 = 64 (multiplication principle). 
+	    For example, {3, J, K} is not one combination but 64, 
+	    corresponding to { {3 Spades, J Spades, K Spades}, {3 Spades, J Spades, K Hearts}, ... }.<br><br> 
 	    The total number of 3-card combinations given that a pair has already been chosen is:<br><br>
 	    C(12,3) * 4 * 4 * 4 = 220 * 64 = 14,080 combinations
 	</div>
-	
+
 	<div id="pair-q3">
 	    <strong>Part 3</strong><br>
 	    Using the answers from Parts 1 and 2, we can determine that the probability of having a pair is:<br>
@@ -232,6 +267,7 @@
 	    The probability of getting a pair (assuming any hand is equally likely) is:<br><br>
 	    (1,098,240 5-card hands with pairs) / (2,598,960 5-card hands) &approx; <strong>.42</strong>
 	</div>
+
 	<h3>Calculating the Probability of a Two Pair</h3>
 	<div id="two-pair">
 	    Follow the same steps as the previous problem to calculate the probability of a two-pair.<br><br>

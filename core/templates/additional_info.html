@@ -8,22 +8,37 @@
     <title>Additional Info</title>
 </head>
 <body>	
+    <div class="breadcrumbs">
+      <a href="/">Home</a>
+      <span class="separator">></span>
+      <span class="current-page">Additional Information</span>
+    </div>
+
     <h1 class="text-center">Supplemental Information</h1>
     <div id="projects-section">
 	<h2>Programming Projects</h2>
 	<p>
-	    I chose these two projects to illustrate my mathematics background. All of the code and design decisions are my own.  
+	    I chose these two projects to illustrate my mathematics background. 
+	    All of the code and design decisions are my own.  
 	</p>
 	<h3>Area Project</h3>
 	<p>
-	    The area project is based on my interest in calculus and in ancient Greek mathematics. The proof for the area of the circle given by Archimedes was the precursor to modern calculus; this and many other calculus-like proofs he derived wouldn't be meaningfully expanded upon and made rigorous for thousands of years.<br><br>
+	    The area project is based on my interest in calculus and in ancient Greek mathematics. 
+	    The proof for the area of the circle given by Archimedes was the precursor to modern calculus; 
+	    this and many other calculus-like proofs he derived wouldn't be meaningfully expanded upon 
+	    and made rigorous for thousands of years.<br><br>
 	    Some of the challenges I faced when building this project were:<br>
 	<ul>
 	    <li>
 		Timing of the animations.
 	    <ul>
 	        <li>
-		    Simultaneous animations could be triggered by pressing a button twice. Animations were also difficult to stop because several loops and animations were working together to create a single polygon, and they all had to be stopped before the animation would stop. I solved these challenges by disabling all buttons during animation and by finding the right spot to break out of the loop governing the animations instead of trying to stop the animations themselves.
+		    Simultaneous animations could be triggered by pressing a button twice. 
+		    Animations were also difficult to stop because several loops and animations 
+		    were working together to create a single polygon, and they all had to be stopped 
+		    before the animation would stop. I solved these challenges by disabling all buttons 
+		    during animation and by finding the right spot to break out of the loop governing 
+		    the animations instead of stopping the animations themselves.
 		</li>
 	    </ul>
 	    </li><br>
@@ -32,7 +47,9 @@
 		 
 	    <ul>
 	        <li>
-		    The canvas element was more difficult than other elements to design in a responsive way. I solved this by creating two different canvas sizes&mdash;each with a corresponding circle size&mdash;as well as three different layouts for viewport width.
+		    The canvas element was more difficult than other elements to design in a responsive way. 
+		    I solved this by creating two different canvas sizes&mdash;each with a corresponding 
+		    circle size&mdash;as well as three different layouts for viewport width.
 		</li>
 	    </ul>
 	    </li>
@@ -40,15 +57,31 @@
 	</p>
 	<h3>Combinatorics Project</h3>
 	<p>
-	    Combinatorics is a very practical subject, applicable in a wide range of situations. I chose poker hands as the topic because it is one that most people are familiar with and it is easy to understand, even for those without a mathematics background. I thought it would be interesting to calculate the probabilities associated with a few hands using both experimental and theoretical methods and show how they converge on the same value.<br><br>
+	    Combinatorics is a very practical subject, applicable in a wide range of situations. 
+	    I chose poker hands as the topic because it is one that most people are familiar with and 
+	    it is easy to understand, even for those without a mathematics background. 
+	    I thought it would be interesting to calculate the probabilities associated with a 
+	    few hands using both experimental and theoretical methods and show how they converge 
+	    on the same value.<br><br>
 	    Some of the challenges I faced included:<br>
 	    <ul>
 	        <li>
 		    Experimental methods yielded an incorrect probability. 
 		    <ul>
-			<li>I used a random number generator to select the card from the deck, so my first thought was that it might have a slight bias. I quickly discarded that idea after an internet search showed that it should be random enough for this experiment.<br><br>
-			    The probability was slightly high so this narrowed the possibilities&mdash;either extra pairs (two pairs, three-of-a-kinds) were being generated, or the number of hands was being undercounted. <br><br>
-			    After confirming a correct count on the number of hands, I investigated how a hand with a given rank might be overcounted, and found the cause: when a card was randomly selected, it was only compared with the previous card to check for duplicates (i.e. if a king of hearts had been drawn in the last draw it should not be drawn again). It should have been compared with all previous cards drawn. This occasionally led to duplicate cards in a hand. Fixing this yielded a correct experimental probability.
+			<li>I used a random number generator to select the card from the deck, 
+			    so my first thought was that it might have a slight bias. I quickly discarded 
+			    that idea after an internet search showed that it should be 
+			    random enough for this experiment.<br><br>
+			    The probability was slightly high so this narrowed the possibilities&mdash;either 
+			    extra pairs (two pairs, three-of-a-kinds) were being generated, or the number of hands 
+			    was being undercounted. <br><br>
+			    After confirming a correct count on the number of hands, I investigated how 
+			    a hand with a given rank might be overcounted, and found the cause: 
+			    when a card was randomly selected, it was only compared with the previous card 
+			    to check for duplicates (i.e. if a king of hearts had been drawn in the last draw 
+			    it should not be drawn again). It should have been compared with all 
+			    previous cards drawn. This occasionally led to duplicate cards in a hand. 
+			    Fixing this yielded a correct experimental probability.
 			</li>
 		    </ul>
 		</li><br>
@@ -56,13 +89,18 @@
 		    Creating a function flexible enough to handle feedback for all questions.
 		    <ul>
 			<li>
-			    For each multiple-choice question I found myself repeating a lot of code related to giving feedback to the user. I wanted to make a function that was flexible enough to handle all the situations/questions that I needed for the webpage. This required some ingenuity. For example: 
+			    For each multiple-choice question I found myself repeating a lot of code 
+			    related to giving feedback to the user. I wanted to make a function 
+			    that was flexible enough to handle all the situations/questions that I needed 
+			    for the webpage. This required some ingenuity. For example: 
 			    <ul>
 				<li>
-				    If I set the value of the previous guess to 'A' and a different question was then answered the previous guess would be associated with the wrong question. 
+				    If I set the value of the previous guess to 'A' and a different question 
+				    was then answered the previous guess would be associated with the wrong question. 
 				</li>
 				<li>
-				    There were often multiple elements that needed modification based on the answer given.
+				    There were often multiple elements that needed modification based 
+				    on the answer given.
 				</li>
 				<li>
 				    All display styles of the elements (block, flex, grid) needed to be tracked. 
@@ -80,11 +118,14 @@
 	<h2>Communication Skills</h2>
 	    <div class="image-container">
 		<p id="tutoring-text">
-		    From 12/2022-06/2023, I worked as an online calculus II tutor. During this time I learned how to communicate complex ideas effectively, in a way tailored to the student's level of understanding. I earned a 5.0 star rating on the website. To the right is one of the reviews I received.<br>
+		    From 12/2022-06/2023, I worked as an online calculus II tutor. 
+		    During this time I learned how to communicate complex ideas effectively, 
+		    in a way tailored to the student's level of understanding. 
+		    I earned a 5.0 star rating on the website. 
+		    To the right is one of the reviews I received.<br>
 		</p>
 		<img src="{% static 'review.png' %}" alt="">
 	    </div>
-
 	</p>
 </body>
 </html>

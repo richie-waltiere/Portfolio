@@ -37,8 +37,7 @@ img {
     border-right: 2px solid black;
 }
 
-
-
+/* Make image and associated text responsive */
 @media screen and (min-width: 640px) {
     .image-container {
 	width: 85%;
@@ -58,5 +57,3 @@ img {
 	margin-right: 30vw;
     }
 }
-
-

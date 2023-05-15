@@ -3,11 +3,11 @@ window.onload = function() {
     let context = canvas.getContext("2d");
     let vw = window.innerWidth;
 
-    const startTime = Date.now();
     const duration = 1000;
     let below600 = (vw < 600);
     let centerX, centerY, radius;
     
+    // Create canvas -- size of canvas based on width of viewport
     function createCanvas(viewportWidth) {
 	if (viewportWidth >= 600) {
 	    canvas.width = 500;
@@ -25,12 +25,14 @@ window.onload = function() {
 	}
     }
 
+    // Redraw polygon on canvas
     function redrawPolygon() {
 	let event = new Event('change');
 	let numberSides = document.getElementById("number-sides");
 	numberSides.dispatchEvent(event);
     }
 
+    // If viewport width crosses threshold of 600px, adjust size of canvas
     function adjustCanvas(viewportWidth) {
 	if (viewportWidth >= 600 && below600) {
 	    canvas.width = 500;
@@ -57,14 +59,14 @@ window.onload = function() {
 
     window.addEventListener("resize", () => {
 	vw = window.innerWidth;
-	console.log(vw);
 	adjustCanvas(vw);
     });
 
     context.strokeStyle = "cyan";
 
+    let startTimeCircle = Date.now();
     function animateCircle() {
-	let elapsedTime = Date.now() - startTime;
+	let elapsedTime = Date.now() - startTimeCircle;
 	let percentComplete = elapsedTime/duration;
 
 	context.beginPath();
@@ -77,11 +79,11 @@ window.onload = function() {
 	}
     }
     requestAnimationFrame(animateCircle);
-    context.save();
 
-    let startTimeLine;
+    // animateLine is the basic building block for animating all polygons
+    let startTime;
     function animateLine(startX, startY, endX, endY) {
-	let elapsedTime = Date.now() - startTimeLine;
+	let elapsedTime = Date.now() - startTime;
 	let percentComplete = elapsedTime/duration;
 
 	context.clearRect(0, 0, canvas.width, canvas.height);
@@ -96,33 +98,37 @@ window.onload = function() {
 	}
     }
 
+    // Return an array of the coordinates of all vertices of the polygon 
+    // numSides: number of sides of the polygon -> int
     function findVertices(numSides) {
 	let vertices = []
+
 	// Adding .0001 to the quantity 2*Math.PI fixed a rounding issue that caused the loop to end early.
 	for (let theta = 0; theta <= 2*Math.PI + .0001; theta += (2*Math.PI/numSides)){
 	    coordX = Math.round(centerX + radius * Math.cos(theta))
 	    coordY = Math.round(centerY + radius * Math.sin(theta))
 	    vertices.push([coordX, coordY])
-	    console.log(vertices);
-	    console.log(theta, 2*Math.PI);
 	}
 	return vertices
     }
 
-
-    let firstVertices;
+    let triangleVertices;
     function animatePolygon(numSides) {
 	let vertices = findVertices(numSides);
-	firstVertices = [vertices[0], vertices[1]]
-	startTimeLine = Date.now()
+
+	// triangleVertices is used below in animateTriangle (under the "calculateArea" event listener)
+	// to draw the triangle, which illustrates how the area of the polygon is calculated.
+	triangleVertices = [vertices[0], vertices[1]]  
+
+	startTime = Date.now()
 	
+	// Draw the sides of the inscribed polygon
 	let i=0; 
 	function animateNextLine() {
 	    startX = vertices[i][0];
 	    startY = vertices[i][1];
 	    endX = vertices[i+1][0];
 	    endY = vertices[i+1][1];
-	    console.log(vertices[i], vertices[i+1])
 	    animateLine(startX, startY, endX, endY);
 	    i++;
 	    if (i+1 < vertices.length) {
@@ -132,13 +138,15 @@ window.onload = function() {
 	requestAnimationFrame(animateNextLine);
     }
     
-    const areaText = document.getElementById("area-text");
+    // Animate the first incribed triangle when the webpage opens
     setTimeout(() => {
 	requestAnimationFrame(() => {
 	    animatePolygon(3);
 	});
     }, duration);
 
+    // Display the area text 1s after the inscribed triangle is drawn
+    const areaText = document.getElementById("area-text");
     setTimeout(() => {
 	areaText.classList.add("fade-in");
     }, duration + 1000);
@@ -150,7 +158,8 @@ window.onload = function() {
     const intro = document.getElementById("intro");
     const playDemonstration = document.getElementById("play-demonstration");
     const skipDemonstration = document.getElementById("skip-demonstration");
-
+ 
+    // Reset all elements to original state and draw the polygon selected
     numberSides.addEventListener("change", () => {
 	context.strokeStyle = "cyan";
 	intro.innerHTML = "Assume the circle has a radius of 4 inches."
@@ -161,14 +170,15 @@ window.onload = function() {
 	context.beginPath();
 	context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
 	context.stroke();
-	console.log(numberSides.value);
 	animatePolygon(numberSides.value);
     });
 
+    // Draw the triangle used to illustrate area calculations. Display calculations.
     calculateArea.addEventListener("click", () => {
 	let n = numberSides.value;
 	let areaCircle = (Math.PI * 16).toFixed(6);
 	let areaPolygon = (numberSides.value *.5 * 4**2 * Math.sin(2 * Math.PI/numberSides.value)).toFixed(6);
+	// Percent difference between area of circle and area of polygon
 	let percentDifference = ((areaCircle - areaPolygon)/areaCircle * 100).toFixed(2)
 
 	playDemonstration.disabled = true;
@@ -196,17 +206,17 @@ window.onload = function() {
 			     </span>
 			    `
 	let i=0; 
-	startTimeLine = Date.now();
-	function animateNextLine() {
-	    endX = firstVertices[i][0];
-	    endY = firstVertices[i][1];
+	startTime = Date.now();
+	function animateTriangle() {
+	    endX = triangleVertices[i][0];
+	    endY = triangleVertices[i][1];
 	    animateLine(centerX, centerY, endX, endY);
 	    i++;
-	    if (i < firstVertices.length) {
-		requestAnimationFrame(animateNextLine);
+	    if (i < triangleVertices.length) {
+		requestAnimationFrame(animateTriangle);
 	    }
 	}
-	requestAnimationFrame(animateNextLine);
+	requestAnimationFrame(animateTriangle);
 
 	setTimeout(() => {
 	    addText.classList.add("fade-in");
@@ -246,47 +256,54 @@ window.onload = function() {
 
 			   We have proved the result.`;
 
-    let animationId, animationId2;
-    let timeOutId, timeOutId2;
     let stopEvent = false;
     playDemonstration.addEventListener("click", (event) => {
+	// Array of all possibilities for the number of sides of the inscribed polygon (ascending order)
 	let numberSidesPolygon = [...numberSides.options].map((option) => option.value);
-	let i=0; 
 
+	// Disable all buttons during demonstration. 
+	// Pressing any of the buttons during the demonstration will cause 
+	// unintended behaviors, like running several animations simultaneously.
 	playDemonstration.disabled = true;
 	calculateArea.disabled = true;
 	numberSides.disabled = true;
+
 	skipDemonstration.style.display = "block";
 
 	let baseText = `Notice how the area of the polygon approaches <br> 
 			the area of the circle as the number of sides increases.`
+
 	// Add left arrow or up arrow, depending on the orientation of the elements
 	intro.innerHTML = (vw < 1024) ? '<div style="font-size: 2.5rem; text-align: center"> &uarr; </div><br>' + 
 			  baseText : baseText + '<br><br><span style="font-size: 5rem"> &larr; </span>'
 
 	addText.innerHTML = "";
 
+	// Draw circle without animation
 	context.clearRect(0, 0, canvas.width, canvas.height);	
 	context.beginPath();
 	context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
 	context.stroke();
 
-	timeOutId = setTimeout(() => {
+	let i=0; 
+	setTimeout(() => { // Allow user a moment to read associated text before beginning demonstration
 	    function animateNextPolygon() {
 		context.beginPath();
 		context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
 		context.stroke();
+
 		displayArea.classList.add("fade-in");
 		displayArea.innerHTML = `${numberSidesPolygon[i]} sides`
 		animatePolygon(numberSidesPolygon[i]);
+
 		i++;
 		if (i < numberSidesPolygon.length) {
 		    if (stopEvent) {
 			context.clearRect(0, 0, canvas.width, canvas.height);	
 			return;
 		    }
-		    timeOutId2 = setTimeout(() => {
-			animationId2 = requestAnimationFrame(animateNextPolygon);
+		    setTimeout(() => {
+			requestAnimationFrame(animateNextPolygon);
 		    }, 1750);
 		}
 		else {
@@ -294,25 +311,33 @@ window.onload = function() {
 		    intro.innerHTML = `Now let's see what happens as the number of sides <br>
 				       approaches infinity. <br><br>`;
 		    addText.innerHTML = finalAnalysis;
+
+		    // Enable all buttons after demonstration
 		    playDemonstration.disabled = false;
 		    calculateArea.disabled = false;
 		    numberSides.disabled = false;
-		    skipDemonstration.style.display = "none";
 
+		    skipDemonstration.style.display = "none";
 		}
 	    }
-	    animationId = requestAnimationFrame(animateNextPolygon);
-	}, 1750);
+	    requestAnimationFrame(animateNextPolygon);
+	}, 1500);
     });
 
     skipDemonstration.addEventListener("click", (event) => {
-	stopEvent = true;
+	stopEvent = true; // Break out of animation loop in demonstration
 	skipDemonstration.disabled = true;
+	
+	// timout = duration * 3.5 is long enough for current animation to end. 
+	// If the current animation does not end before breaking out of the
+	// animation loop, the demonstration will continue.
 	setTimeout(() => {
+	    // Display empty circle (no inscribed polygons) after demonstration
 	    context.clearRect(0, 0, canvas.width, canvas.height);	
 	    context.beginPath();
 	    context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
 	    context.stroke();
+
 	    displayArea.classList.add("fade-in");
 	    displayArea.innerHTML = "";
 	    addText.style.display = "inline-block"; 

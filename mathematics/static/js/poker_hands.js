@@ -1,3 +1,4 @@
+// Standard 52-card deck
 const createDeck = () => {
     let cards = [];
     let suits = [
@@ -6,9 +7,10 @@ const createDeck = () => {
 		'&clubs;',
 		'&spades;'
 		]
-    // Array of numbers from 2 to 10
+
+    // Array of integers from 2 to 10
     let values = Array.from(Array(11).keys()).slice(2);
-    // Map integer digits to strings and append face values
+    // Complete array of card values
     values = values.map((digit) => String(digit)).concat(['J', 'Q', 'K', 'A'])
 
     // Create deck
@@ -17,25 +19,24 @@ const createDeck = () => {
 	    cards.push(value + suit)
 	}
     }
-    console.log(cards);
     return cards
 }
 
-// Displays each hand, twenty-five hands per page
-// element: Element where cards will be displayed
-// cards: Cards to be displayed -- 2d array, organized into arrays of 5-card hands (e.g. [[hand1], [hand2], ... ])
-// rankArr: Array consisting of the rank of each hand (e.g. ['Pair', null, 'Two Pair', ... ])
+// Displays each poker hand, along with its rank -- twenty-five hands per page
+// element: Element where cards will be displayed -> HTML Element
+// cards: Hands to be displayed -> 2d array, organized into arrays of 5-card hands (e.g. [[hand1], [hand2], ... ])
+// rankArr: Array consisting of the rank of each hand, in order (e.g. ['Pair', null, 'Two Pair', ... ]) -> 1d array
 function displayEachHand(element, cards, rankArr, startIdx) {
     element.innerHTML = '';
     for (let i=startIdx; i<cards.length && i<(startIdx + 25); i++) {
 	let rank = rankArr[i] ? ' &nbsp;&nbsp;&rarr;&nbsp;&nbsp;<span style="font-family: Courier, monospace; font-weight: 700">' + rankArr[i] + '</span>' : ''
-	console.log(i, cards[i]);
 	element.innerHTML += cards[i].join('  ') + rank + '<br><br>';
     }
 }
 
 let cards = createDeck();
 
+// Deal a single 5-card poker hand
 function dealHand() {
     let randomInt, card;
     let hand = [];
@@ -55,6 +56,9 @@ function dealHand() {
     return hand;
 }
 
+// Deal 5-card poker hands
+// numHands: Number of hands to be dealt -> int
+// Returns 2d array of hands (e.g. [[hand1], [hand2], [hand2], ...])
 function dealAllHands(numHands) {
     let hands = [];
     for (let i=0; i<numHands; i++) {
@@ -64,13 +68,16 @@ function dealAllHands(numHands) {
     return hands;
 }
 
-// The hand ranks under consideration -- pair, two pair, three-of-a-kind -- are mutually exclusive. 
-// Return value is of the form {pair: boolean, twoPair: boolean, threeOfAKind: boolean}
+// The ranks of the hands under consideration -- pair, two pair, three-of-a-kind -- are mutually exclusive. 
+// Return value is an object of the form {pair: boolean, twoPair: boolean, threeOfAKind: boolean, rank: str || null}
+// rank only ranks the three hands under consideration: pair, two pair, three-of-a-kind. 
+// All other hands are ranked null.
 function rankHand(hand) {
     // Card value is two characters in length if it 10. Otherwise, card value is one character.
     let handValues = hand.map((card) => (card[1] === '0') ? card.slice(0,2) : card.slice(0,1))
     let counts = {};
     
+    // Count the number of times each rank occurs in the hand
     for (let value of handValues) {
 	if (!counts[value]) {
 	    counts[value] = handValues.reduce((acc, val) => acc + (val === value), 0);
@@ -78,7 +85,7 @@ function rankHand(hand) {
     }
 
     let countValues = Object.values(counts);
-    let numPairs = countValues.reduce((acc,val) => acc + (val === 2), 0);
+    let numPairs = countValues.reduce((acc,val) => acc + (val === 2), 0); // Count pairs
     let isPair = (numPairs === 1);
     let isTwoPair = (numPairs === 2);
     let isThreeOfAKind = countValues.includes(3) && (numPairs === 0); // An additional pair would create a full house
@@ -86,9 +93,13 @@ function rankHand(hand) {
     return [isPair, isTwoPair, isThreeOfAKind, rank];
 }
 
+// Rank all hands provided in the argument list
+// hands: 2d array of 5-card poker hands (e.g. [[hand1], [hand2], ... ])
 function rankAllHands(hands) {
     let [pairs, twoPairs, threeOfAKinds] = [0, 0, 0];
-    let rankArr = []
+    let rankArr = [];
+    // Sum the number of pairs, two pairs, and three-of-a-kinds and create an array of the
+    // rank of each hand, listed in order.
     for (let hand of hands) {
 	handRank = rankHand(hand);
 	pairs += handRank[0];
@@ -99,6 +110,7 @@ function rankAllHands(hands) {
     return [pairs, twoPairs, threeOfAKinds, rankArr];
 }
 
+// Create bar chart of the probability of the selected hand
 const canvas = document.getElementById('bar-chart');
 const context = canvas.getContext('2d');
 function displayChart(proportion, handRank) {
@@ -107,8 +119,8 @@ function displayChart(proportion, handRank) {
     let label1 = handRank + ' ( ' + proportion + ' ) '
     let label2 = 'Other Hands ' + '( ' + complement + ' ) '
 
+    // Destroy previous chart, if one exists
     const currentChart = Chart.getChart(context);
-    console.log(currentChart);
     if (currentChart) {
 	currentChart.destroy();
     }
@@ -134,14 +146,7 @@ function displayChart(proportion, handRank) {
 	    }]
 	},
 	options: {
-	    responsive: true,
-	    scales: {
-		yAxes: [{
-		    ticks: {
-			beginAtZero: true
-		    }
-		}]
-	    }
+	    responsive: true
 	}
     });
 }
@@ -159,14 +164,15 @@ let createNewHand = true;
 trialsButton.addEventListener('click', () => {
     let n = parseInt(numTrials.value);
     errorMessage.innerHTML = ''; 
-    pokerDisplayControls.style.display = 'none';
     if (Number.isInteger(n) && 1 <= n && n <= 50000) {
 	if (createNewHand) {
+	    // Deal and rank all hands
 	    hands = dealAllHands(n);
 	    [pairs, twoPairs, threeOfAKinds, rankArr] = rankAllHands(hands);
+
+	    // Display page controls and first page of poker hands
 	    startIdx = 0;
 	    displayEachHand(displayHands, hands, rankArr, startIdx);
-
 	    pokerDisplayControls.style.display = 'flex';
 	    numPages = Math.ceil(hands.length/25);
 	    pageNumberLabel.innerHTML = `Page Number (1-${numPages}):`;
@@ -176,6 +182,7 @@ trialsButton.addEventListener('click', () => {
 	    createNewHand = true;
 	}
 
+	// Display chart of the selected hand
 	let selectedHand = selectHand.value
 	if (selectedHand === 'pair') {
 	    displayChart(pairs/n, 'Pair');
@@ -186,7 +193,6 @@ trialsButton.addEventListener('click', () => {
 	else if (selectedHand === 'three-of-a-kind') {
 	    displayChart(threeOfAKinds/n, 'Three Of A Kind');
 	}
-	console.log('pairs: ', pairs, 'twoPairs: ', twoPairs, 'threeOfAKind: ', threeOfAKinds);
     }
     else {
 	errorMessage.innerHTML = '<span style="color: red">Enter a number between 1 and 50,000</span>';
@@ -200,6 +206,7 @@ numTrials.addEventListener('keydown', (event) => {
     }
 });
 
+// Investigate the probability of another rank of hand. Keep the same set of poker hands.
 selectHand.addEventListener('change', (event) => {
     if (numTrials.value) {
 	createNewHand = false;
@@ -214,6 +221,7 @@ function displayPageNumber(page) {
     pageNumberDisplay.innerHTML = `page ${page}`;
 }
 
+// Display previous page
 let currentPage = 1;
 const prevButton = document.getElementById('prev-button');
 prevButton.addEventListener('click', () => {
@@ -223,10 +231,13 @@ prevButton.addEventListener('click', () => {
     displayPageNumber(currentPage);
 });
 
+// Display next page
 const nextButton = document.getElementById('next-button');
 nextButton.addEventListener('click', () => {
-    // remainderHands keeps the number of hands displayed on the final page constant -- the remaining n hands, where n <= 25.
+    // remainderHands keeps the number of hands displayed on the final page constant --
+    // the remaining n hands, where n <= 25.
     let remainderHands = hands.length % 25;
+
     // This conditional is necessary to avoid displaying a blank page when startIdx = hands.length.
     if (remainderHands === 0) {
 	startIdx = Math.min(hands.length - 25, startIdx + 25);
@@ -236,18 +247,16 @@ nextButton.addEventListener('click', () => {
     }
     displayEachHand(displayHands, hands, rankArr, startIdx);
     currentPage = Math.min(numPages, currentPage + 1);
-    console.log(startIdx, currentPage);
     displayPageNumber(currentPage);
 });
 
+// Navigate to page number using text input
 pageNumber.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
 	let toPage = parseInt(pageNumber.value);
 	if (Number.isInteger(toPage) && 1 <= toPage && toPage <= numPages) {
-	    console.log(toPage);
 	    currentPage = toPage;
 	    startIdx = 25 * (currentPage - 1);
-	    console.log(startIdx, currentPage);
 	    displayEachHand(displayHands, hands, rankArr, startIdx);
 	    displayPageNumber(currentPage);
 	}

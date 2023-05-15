@@ -9,8 +9,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/combinatorics.css' %}">
     <title>Poker Hands</title>
 </head>
+<!-- Experiment with probabilities by randomly generating up to 50,000 five-card poker hands -->
 <body>
     <h1 class="text-center" id="poker-hand-title">Poker Hands &mdash; Probabilities</h1>
+    <!-- Controls for experiment -->
     <div id="poker-hand-grid">
 	<div id="experiment-controls">
 	    <p id="intro-text">
@@ -19,7 +21,6 @@
 		based on the hands generated.<br><br>
 		The higher the number of trials, the closer the experimental probability will be
 		to the theoretical probability.
-		
 	    </p>
 	    <label for="select-hand">Select a Hand:</label><br>
 	    <select name="select-hand" id="select-hand">
@@ -36,6 +37,8 @@
 	    </div>
 	</div>
     </div>
+
+    <!-- Display chart and poker hands -->
     <canvas id="bar-chart"></canvas>
     <div class="no-display" id="poker-display-controls">
 	<button class="button" id="prev-button">Previous</button>
@@ -46,8 +49,7 @@
 	<button class="button" id="next-button">Next</button>
     </div>
     <p id="current-page"></p>
-    <div id="display-hands">
-    </div>
+    <div id="display-hands"></div>
 <script src="{% static 'js/poker_hands.js' %}" defer></script>
 </body>
 </html>

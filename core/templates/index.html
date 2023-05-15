@@ -11,6 +11,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<!-- Resume and Portfolio -->
 <body>
     <div class="grid-container">
 	<div class="highlights">
@@ -24,12 +25,15 @@
 	    <li>Solid and proven communication skills</li>
 	  </ul>
 	</div>
+
+	<!-- Resume -->
 	<main>
 	    <header>
 		<address>
 		    <h1 id="name">Richard Waltiere</header>
 		    <p id="contact-info">
-			richywaltiere@gmail.com&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; Corvallis, OR &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; (928) 856-9307
+			richywaltiere@gmail.com&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; Corvallis, 
+			OR &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp; (928) 856-9307
 		    </p>
 		</address>
 	    </header>
@@ -38,13 +42,13 @@
 		    <ul class="experience-list">
 			<li>Two years experience coding in Python</li>
 			<li>Created this website using Django, Javascript, HTML, and CSS</li>
-			<ul class="list-square-type">
+			<ul class="list-square">
 			    <li>Code: (Put git link here)</li>
 			    <li>Responsive design</li>
 			</ul>
 			<li>Basic knowledge of Linux, Git, and SQL</li>
 			<li>Communicated complex ideas effectively as an online calculus II tutor</li>
-			<ul class="list-square-type">
+			<ul class="list-square">
 			    <li>December 2022 - June 2023</li>
 			    <li>5.0 star tutor rating</li>
 			</ul>
@@ -52,7 +56,7 @@
 	    </p>
 	    <p class="education">
 		<h2 class="title" id="education-title">Education</h2>
-		    <ul class="education_list">
+		    <ul class="education-list">
 		        <li><span class="school">
 				<span>
 				    <strong>Bachelor of Science in Mathematics, </strong> 
@@ -60,10 +64,10 @@
 				</span>
 				    <span class="font-style2" style=font-weight:500>May 2022</span>
 			    </span>
-			    <ul class=list-square-type>
+			    <ul class=list-square>
 				<li>GPA 4.0</li>
 				<li>Relevant Coursework
-				    <ul class="list-circle-type">
+				    <ul class="list-circle">
 					<li>Mathematics</li>
 					    <ul class="font-style2" style="list-style-type:'&mdash;'">
 					        <li>Discrete Mathematics</li>
@@ -88,8 +92,9 @@
 		for more information
 	    </div>
 	</main>
-        <div class="portfolio-links">
-	    <h2 class="title portfolio-title">Portfolio</h2>
+
+        <div id="portfolio-links">
+	    <h2 class="title" id="portfolio-title">Portfolio</h2>
 	    <ul>
 		<li><a href="{% url 'mathematics' %}">Programming Projects</a></li>
 	        <li><a href="{% url 'additional_info' %}">Additional Information</a></li>
@@ -97,7 +102,8 @@
 	</div>
     </div>
 
-    <!-- Direction of arrow varies, depending on orientation of elements -->
+    <!-- Direction of arrow, in portfolio-prompt section, varies, 
+	 depending on orientation of elements -->
     <script>
 	let portfolioPrompt = document.getElementById('portfolio-prompt');
 	let vw = window.innerWidth;

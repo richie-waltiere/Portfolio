@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/archimedes.css' %}">
     <title>Mathematics</title>
 </head>
+<!-- This project approximates the area of a circle using regular polygons -->
 <body>
     <div class="breadcrumbs">
       <a href="/">Home</a>
@@ -16,6 +17,7 @@
       <span class="separator">></span>
       <span class="current-page">Area Approximation</span>
     </div>
+
     <div id="main-content">
 	<div id="polygon-controls">
 	    <div id="select-polygon">
@@ -44,12 +46,14 @@
 		<button id="skip-demonstration">Skip</button>
 	    </div>
 	</div>
+
 	<div id="canvas-container">
 	    <canvas id="canvas">
 	    </canvas>
 	    <div id="display-area">
 	    </div>
 	</div>
+
 	<div id="area-derivation">
 	    <p id="area-text">
 		<span id="intro"> Assume the circle has a radius of 4 inches. <br><br></span>

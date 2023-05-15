@@ -1,3 +1,4 @@
+/* General styles */
 h3 {
     border-top: 1px solid black;
     padding-top: 1.5vh;
@@ -38,6 +39,16 @@ body {
     padding: 1vw;
 }
 
+/* Breadcrumbs section */
+#current-page {
+    margin-bottom: 0px;
+    margin-top: 2px;
+    text-align: right;
+    font-family: Courier, monospace;
+    font-weight: 600;
+}
+
+/* Styles related to questions and corresponding responses */
 .button {
     width: 80px;
     height: 22px;
@@ -75,6 +86,7 @@ body {
     border: 2px solid black;
 }
 
+/* Poker probability section */
 #card-probabilities {
     border-top: 2px solid black;
     margin-top: 2.5vh;
@@ -86,6 +98,7 @@ body {
     padding-top: 2vh;
 }
 
+/* Styles for "poker hands" template */
 #poker-hand-title {
     width: 80vw;
     font-size: 1.3rem;
@@ -123,20 +136,14 @@ body {
     align-items: end;
 }
 
-#current-page {
-    margin-bottom: 0px;
-    margin-top: 2px;
-    text-align: right;
-    font-family: Courier, monospace;
-    font-weight: 600;
-}
-
 @media screen and (min-width: 400px) {
+    /* Combinatorics template */
     #sock-image {
 	width: 70vw; 
 	margin-top: 2vh;
     }
 
+    /* Poker hands template */
     #poker-hand-title {
 	width: 65vw;
     }
@@ -152,6 +159,7 @@ body {
 }
 
 @media screen and (min-width: 640px) {
+    /* Combinatorics template */
     #sock-image {
 	width: 50vw; 
 	margin-top: 2vh;
@@ -163,6 +171,8 @@ body {
 	border: 2px solid black;
     }
 
+    /* Increasing width of last column keeps grid on the */ 
+    /* left-hand side of the webpage and limits width of the images */
     #cup-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 2fr;
@@ -174,6 +184,7 @@ body {
 	justify-content: start;
     }
 
+    /* Poker hands template */
     #poker-hand-title {
 	width: 65vw;
     }
@@ -192,6 +203,7 @@ body {
 }
 
 @media screen and (min-width: 800px) {
+    /* Combinatorics template */
     #sock-image {
 	width: 40vw; 
 	margin-top: 2vh;
@@ -211,16 +223,17 @@ body {
     }
 
     .button-container {
-	justify-content: start;
 	margin-left: 1vw;
     }
 
+    /* Poker hands template */
     #bar-chart {
 	margin-left: 20vw;
     }
 }
 
 @media screen and (min-width: 1024px) {
+    /* Combinatorics template */
     #sock-image {
 	width: 35vw; 
 	margin-top: 2vh;
@@ -232,6 +245,8 @@ body {
 	border: 2px solid black;
     }
 
+    /* Increasing width of last column keeps grid on the */ 
+    /* left-hand side of the webpage and limits width of the images */
     #cup-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 6fr;
@@ -239,11 +254,7 @@ body {
 	grid-gap: 4px;
     }
 
-    .button-container {
-	justify-content: start;
-	margin-left: 1vw;
-    }
-
+    /* Poker hands template */
     #bar-chart {
 	margin-left: 30vw;
     }

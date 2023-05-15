@@ -1,36 +1,51 @@
+/* General styles */
 body {
     font-family: Georgia, serif;
     font-size: 1.3rem;
 }
-    
-.grid-container {
-  display: grid;
-  grid-template-columns: 8fr 2fr;
-  grid-template-rows: 1fr;
-  min-height: 100vh;
+
+a {
+    color: rgb(30, 0, 130);
 }
 
-.highlights {
-    display: none;
-    background-image: linear-gradient(to right, skyblue, teal);
-    padding-left: 5px;
-    padding-right: 10px;
+a:hover {
+    color: rgb(130, 200, 230);
 }
 
-.highlights li {
-    margin-bottom: 8px;
+.title {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    font-size: 1.7rem;
+    padding-left: 2%;
+    text-shadow: 2px 2px 6px rgb(255, 255, 255);
 }
 
-.highlights h2.title {
-    text-decoration: underline;
-    margin-left: 20px;
+.list-circle {
+    list-style-type: circle;
 }
+
+.list-square {
+    list-style-type: square;
+}
+
+.font-style1 {
+    font-family: "Times New Roman", serif;
+    font-size: 1.1em;
+}
+
+.font-style2{
+    font-family: "American Typewriter", serif;
+}
+
+/* Page structure */
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 8fr 2fr;
+  height: 100vh;
 }
-
+    
+/* Main section */
 main {
     grid-row: 1/2;
     border-bottom: 1px solid darkgreen;
@@ -61,15 +76,7 @@ main address {
     margin-bottom: 0px
 }
 
-.title {
-    font-size: 1.6rem;
-    margin-top: 10px;
-    font-size: 1.7rem;
-    padding-left: 2%;
-    text-shadow: 2px 2px 6px rgb(255, 255, 255);
-}
-
-.education_list, .experience-list{
+.education-list, .experience-list{
     padding-right: 10%;
     font-size: .9rem;
     padding-left: 7%;
@@ -82,34 +89,35 @@ main address {
     justify-content: space-between;
 }
 
-.list-circle-type {
-    list-style-type: circle;
-}
-
-.list-square-type {
-    list-style-type: square;
-}
-
-.font-style1 {
-    font-family: "Times New Roman", serif;
-    font-size: 1.1em;
-}
-
-.font-style2{
-    font-family: "American Typewriter", serif;
-}
-
 .cs-courses {
     padding-bottom: 1%;
 }
 
-.portfolio-links {
+/* Highlights section */
+.highlights {
+    display: none;
+    background-image: linear-gradient(to right, skyblue, teal);
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.highlights li {
+    margin-bottom: 8px;
+}
+
+.highlights h2.title {
+    text-decoration: underline;
+    margin-left: 20px;
+}
+
+/* Portfolio section */
+#portfolio-links {
     grid-row: 2 / 3;
     background-image: linear-gradient(to top,  teal, skyblue);
     padding-bottom: 30px;
 }
 
-.portfolio-title {
+#portfolio-title {
     text-decoration: underline;
     text-align: center;
 }
@@ -118,14 +126,7 @@ main address {
     margin-left: 2vw;
 }
 
-a {
-    color: rgb(30, 0, 130);
-}
-
-a:hover {
-    color: rgb(130, 200, 230);
-}
-
+/* New page structure */
 @media screen and (min-width: 640px) {
     .grid-container {
       grid-template-columns: 7fr 3fr;
@@ -136,13 +137,14 @@ a:hover {
 	grid-column: 1 / 2;
     }
 
-    .portfolio-links {
+    #portfolio-links {
 	grid-column: 2 / 3;
 	background-image: linear-gradient(to right,  teal, skyblue);
 	grid-row: 1;
     }
 }
 
+/* New page structure. Add highlights section to page. */
 @media screen and (min-width: 800px) {
     .grid-container {
       grid-template-columns: 2fr 6fr 2fr;
@@ -158,12 +160,12 @@ a:hover {
 	grid-column: 2 / 3;
     }
 
-    .portfolio-links {
+    #portfolio-links {
 	grid-column: 3 / 4;
 	grid-row: 1;
     }
 
-    .portfolio-title {
+    #portfolio-title {
 	text-decoration: underline;
 	padding-left: 7%;
     }
@@ -175,4 +177,3 @@ a:hover {
       grid-template-rows: 1fr;
     }
 }
-

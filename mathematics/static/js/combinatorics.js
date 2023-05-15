@@ -1,3 +1,6 @@
+// Briefly change color of the background of the element provided as an argument.
+// element: HTML element to which blink will be applied -> HTML Element
+// blinkColor: color which will appear for 100ms before element returns to original background color -> str
 function blink(element, blinkColor) {
     const bgColor = getComputedStyle(element).background;
     element.style.background = blinkColor;
@@ -6,10 +9,12 @@ function blink(element, blinkColor) {
     }, 100);
 }
 
+// Sets value of global variable prevGuess
+// questionNumber: current questionNumber -> int
+// guess: current guess -> int
 let prevGuess, prevQuestionNumber;
 function setPrevGuess(questionNumber, guess=null) {
-    console.log(prevQuestionNumber, questionNumber);
-    console.log('guess: ', guess);
+    // prevGuess is associated with another question and should be 'reset' to null
     if (prevQuestionNumber !== questionNumber) {
 	prevGuess = null;
     }
@@ -19,28 +24,37 @@ function setPrevGuess(questionNumber, guess=null) {
 	}
     }
     prevQuestionNumber = questionNumber;
-    console.log('prevGuess: ', prevGuess);
 }
 
-// responseElement: element to which the response is written
-// otherElements should be an array of the form [{element: elmnt1 , displayStyle: displayStyle1], {element: elmnt2, displayStyle: displayStyle2}...]
+/* Provides feedback for correct and incorrect responses to a question.
+ * questionNumber: Number of the question under consideration -> int
+ * checkedValue: Value selected by user -> str
+ * correctAnswer: Correct value for the question under consideration -> str
+ * incorrectAnswers: Incorrect values for the question under consideration -> str
+ * responseElement: Element to which the response is written -> HTML Element
+ * otherElements: Other elements which need modified when providing feedback -> HTML Element
+ * otherElements should be an array of the form [{element: elmnt1 , displayStyle: displayStyle1}, 
+ * {element: elmnt2, displayStyle: displayStyle2}...] 
+ * displayStyle allows the function to return the element to the correct display style (block, flex, grid, etc.) */
 function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=null) {
     const bgColor = getComputedStyle(responseElement).background;
     responseElement.style.display = 'block'
+
+    // Hide all other elements until correct answer given
     for (element of otherElements) {
 	element.element.style.display = 'none'
     }
 
     let guess;
 
-    // Reset prevGuess value to null if it's value is associated with another question
+    // Set prevGuess to null if it is associated with another question.
     setPrevGuess(questionNumber);
 
     if (checkedValue === null) {
 	responseElement.innerHTML = '<span style="color: white">Please select an answer.</span>';
+	responseElement.scrollIntoView({behavior: 'smooth'});
 	return;
     }
-
     else {
 	responseElement.innerHTML = '';
 	guess = checkedValue.value;
@@ -48,6 +62,7 @@ function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrect
 	responseElement.innerHTML = output;
     }
 
+    // If answer is correct, display all elements provided in otherElements
     if (guess === correctAnswer) {
 	for (element of otherElements) {
 	    element.element.style.display =  element.displayStyle;
@@ -55,16 +70,21 @@ function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrect
 	responseElement.scrollIntoView({behavior: 'smooth'});
     }
  
+    // Blink to indicate the answer is still incorrect
     if (incorrectAnswers.includes(prevGuess) && incorrectAnswers.includes(guess)) {
 	blink(responseElement, 'lightseagreen');
     }
 
+    // Ensure question and response are visible if guess is incorrect
     if (guess !== correctAnswer) {
 	responseElement.scrollIntoView({ behavior: "smooth", block: "end" });
     }
     setPrevGuess(questionNumber, guess=guess);
 }
 
+// Pigeonhole principle section:
+
+// Example 1
 const findMatchButton = document.getElementById('find-match-button');
 const findMatchResponse = document.getElementById('find-match-response');
 const findMatchExplanation = document.getElementById('find-match-explanation');
@@ -82,6 +102,7 @@ findMatchButton.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// Example 2
 const birthMonthButton = document.getElementById('birthmonth-button');
 const birthMonthResponse = document.getElementById('birthmonth-response');
 const birthMonthExplanation = document.getElementById('birthmonth-explanation');
@@ -99,6 +120,9 @@ birthMonthButton.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// Poker section -- probability of a pair: 
+
+// question 1
 const pairQ1Button = document.getElementById('pair-q1-button');
 const pairQ1Response= document.getElementById('pair-q1-response');
 const pairQ1Explanation= document.getElementById('pair-q1-explanation');
@@ -114,6 +138,7 @@ pairQ1Button.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// question 2
 const pairQ2Button = document.getElementById('pair-q2-button');
 const pairQ2Response= document.getElementById('pair-q2-response');
 const pairQ2Explanation= document.getElementById('pair-q2-explanation');
@@ -129,6 +154,7 @@ pairQ2Button.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// question 3
 const pairQ3Button = document.getElementById('pair-q3-button');
 const pairQ3Response= document.getElementById('pair-q3-response');
 const pairQ3Explanation= document.getElementById('pair-q3-explanation');
@@ -144,6 +170,7 @@ pairQ3Button.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// Poker section -- probability of a two pair
 const twoPairButton = document.getElementById('two-pair-button');
 const twoPairResponse= document.getElementById('two-pair-response');
 const twoPairExplanation= document.getElementById('two-pair-explanation');
@@ -159,6 +186,7 @@ twoPairButton.addEventListener('click', () => {
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
 
+// Poker section -- probability of a three of a kind
 const threeOfAKindButton = document.getElementById('three-of-a-kind-button');
 const threeOfAKindResponse= document.getElementById('three-of-a-kind-response');
 const threeOfAKindExplanation= document.getElementById('three-of-a-kind-explanation');
@@ -173,4 +201,3 @@ threeOfAKindButton.addEventListener('click', () => {
 
     questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
 });
-

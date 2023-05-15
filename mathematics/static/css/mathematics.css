@@ -1,3 +1,4 @@
+/* General styles */
 body {
     background: rgb(15,188,200);
 }
@@ -8,13 +9,14 @@ h1 {
     margin-bottom: 2vh;
 }
 
-.title-image {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+.title {
+    margin-top: 5vh;
+    text-align: center;
+    font-size: 1.2rem;
+    text-decoration: underline;
 }
 
-
+/* Page layout */
 #projects {
     display: grid;
     grid-template-columns: 1fr; 
@@ -25,6 +27,15 @@ h1 {
     height: 90vh;
 }
 
+/* Both projects */
+#projects a {
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+/* Area project */
 #area-of-circle {
     grid-row: 1 / span 1;
     border: 3px solid dimgray;
@@ -51,13 +62,14 @@ h1 {
     height: 50%;
 }
 
-#image-container-probability {
+/* Combinatorics project */
+#image-container-combinatorics {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0
+    margin-top: 0;
 }
 
 .card-suit {
@@ -76,7 +88,7 @@ h1 {
     font-size: 1.1rem;
 }
 
-#probability-project {
+#combinatorics-project {
     grid-row: 2 / span 1;
     background: linear-gradient(rgb(0, 0, 118), rgb(0, 0, 138));
     height: 100%;
@@ -87,30 +99,17 @@ h1 {
     border: 3px solid black;
 }
 
-#probability-project:hover {
-    border: 3px solid gold;
+#combinatorics-project:hover {
+    border: 3px solid rgb(120, 240, 255);
 }
 
-.title {
-    margin-top: 5vh;
-    text-align: center;
-    font-size: 1.2rem;
-    text-decoration: underline;
-}
-
-#projects a {
-    text-decoration: none;
-    color: white;
-    height: 100%;
-    width: 100%;
-}
-
+/* Images for both projects made responsive */
 @media screen and (min-width: 400px) {
     .card-suit {
 	font-size: 4rem;
     }
 
-    #image-container-probability {
+    #image-container-combinatorics {
 	width: 75%;
     }
 
@@ -119,12 +118,13 @@ h1 {
 	height: 40%;
     }
 }
+
 @media screen and (min-width: 640px) {
     .card-suit {
 	font-size: 4.5rem;
     }
 
-    #image-container-probability {
+    #image-container-combinatorics {
 	width: 50%;
     }
 
@@ -132,7 +132,9 @@ h1 {
 	width: 27%;
 	height: 27%;
     }
+}
 
+/* Page layout modified */
 @media screen and (min-width: 960px) {
     #projects {
 	display: grid;
@@ -140,16 +142,11 @@ h1 {
 	grid-template-rows: 1fr; 
     }
 
-    #image-container-probability {
+    #image-container-combinatorics {
 	display: flex;
 	justify-content: space-between;
-	width: 50%;
+	width: 60%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 0
-    }
-
-    #image-container-probability {
-	width: 60%;
     }
 }

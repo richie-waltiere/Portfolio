@@ -1,3 +1,4 @@
+/* Page layout */
 #main-content {
     display: grid;
     grid-template-rows: 1fr 6fr 2fr;
@@ -6,6 +7,7 @@
     height: 100%;
 }
 
+/* General styles */
 body {
     margin: 0px 0px;
     height: 100vh;
@@ -18,6 +20,7 @@ label {
     color: white;
 }
 
+/* Breadcrumbs section */
 .breadcrumbs { 
     background: rgb(0, 0, 110);
     box-sizing: border-box;
@@ -29,10 +32,12 @@ label {
 .breadcrumbs a , .separator {
     color: lightgray;
 }
+
 .current-page { 
     color: rgb(190, 190, 190);
 }
 
+/* Controls section */
 #polygon-controls {
     display: flex;
     justify-content: center;
@@ -74,6 +79,7 @@ label {
     margin-top: 5vh;
 }
 
+/* Canvas section */
 #canvas-container {
     grid-row: 2 / span 1;
     background: linear-gradient(black, darkslategray);
@@ -89,6 +95,7 @@ label {
     transform: translate(-50%, -50%);
 }
 
+/* Display section */
 #display-area {
     position: absolute;
     width: 100%;
@@ -115,7 +122,7 @@ label {
     overflow-y: scroll;
 }
 
-
+/* Animations */
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s ease-in forwards;
@@ -130,7 +137,6 @@ label {
     }
 }
 
-
 @media screen and (min-width: 600px) {
     #canvas-container {
 	height: 550px;
@@ -142,6 +148,7 @@ label {
     }
 }
 
+/* New page layout */
 @media screen and (min-width: 800px) {
     #main-content {
 	display: grid;
@@ -175,6 +182,7 @@ label {
     }
 }
 
+/* New page layout */
 @media screen and (min-width: 1024px) {
     #main-content {
 	display: grid;
