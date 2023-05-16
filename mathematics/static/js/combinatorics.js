@@ -66,7 +66,6 @@ function questionFeedback(questionNumber, guess, correctAnswer, responseElement,
 	responseElement.scrollIntoView({behavior: 'smooth'});
     }
  
-    console.log(incorrectAnswers, prevGuess, guess);
     // Blink to indicate the answer is still incorrect
     if (incorrectAnswers.includes(prevGuess) && incorrectAnswers.includes(guess)) {
 	blink(responseElement, 'lightseagreen');

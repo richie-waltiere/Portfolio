@@ -28,7 +28,7 @@ window.onload = function() {
     // Redraw polygon on canvas
     function redrawPolygon() {
 	let event = new Event('change');
-	let numberSides = document.getElementById("number-sides");
+	const numberSides = document.getElementById("number-sides");
 	numberSides.dispatchEvent(event);
     }
 
@@ -173,13 +173,13 @@ window.onload = function() {
 	animatePolygon(numberSides.value);
     });
 
-    let polygonRedrawRequired = false; // If demonstration is triggered, polygon must be redrawn.
+    let polygonRedrawRequired; // If demonstration is triggered, polygon must be redrawn.
 
     // Draw the triangle used to illustrate area calculations. Display calculations.
     calculateArea.addEventListener("click", () => {
 	let n = numberSides.value;
 	let areaCircle = (Math.PI * 16).toFixed(6);
-	let areaPolygon = (numberSides.value *.5 * 4**2 * Math.sin(2 * Math.PI/numberSides.value)).toFixed(6);
+	let areaPolygon = (n *.5 * 4**2 * Math.sin(2 * Math.PI / n)).toFixed(6);
 	// Percent difference between area of circle and area of polygon
 	let percentDifference = ((areaCircle - areaPolygon)/areaCircle * 100).toFixed(2)
 
@@ -269,9 +269,6 @@ window.onload = function() {
 
     let stopEvent = false;
     playDemonstration.addEventListener("click", (event) => {
-	// Array of all possibilities for the number of sides of the inscribed polygon (ascending order)
-	let numberSidesPolygon = [...numberSides.options].map((option) => option.value);
-
 	// Disable all buttons during demonstration. 
 	// Pressing any of the buttons during the demonstration will cause 
 	// unintended behaviors, like running several animations simultaneously.
@@ -297,6 +294,9 @@ window.onload = function() {
 	context.stroke();
 
 	polygonRedrawRequired = true;
+
+	// Array of all possibilities for the number of sides of the inscribed polygon (ascending order)
+	let numberSidesPolygon = [...numberSides.options].map((option) => option.value);
 
 	let i=0; 
 	setTimeout(() => { // Allow user a moment to read associated text before beginning demonstration
