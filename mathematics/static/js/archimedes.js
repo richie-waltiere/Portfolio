@@ -173,6 +173,8 @@ window.onload = function() {
 	animatePolygon(numberSides.value);
     });
 
+    let polygonRedrawRequired = false; // If demonstration is triggered, polygon must be redrawn.
+
     // Draw the triangle used to illustrate area calculations. Display calculations.
     calculateArea.addEventListener("click", () => {
 	let n = numberSides.value;
@@ -182,6 +184,16 @@ window.onload = function() {
 	let percentDifference = ((areaCircle - areaPolygon)/areaCircle * 100).toFixed(2)
 
 	playDemonstration.disabled = true;
+
+	if (polygonRedrawRequired) {
+	    redrawPolygon(n);
+	    requestAnimationFrame(animateTriangle);
+	    polygonRedrawRequired = false;
+	}
+	else {
+	    requestAnimationFrame(animateTriangle);
+	}
+
 
 	intro.innerHTML = "Assume the circle has a radius of 4 inches."
 	addText.innerHTML = `Divide the polygon into ${n} congruent triangles like the one shown.
@@ -216,11 +228,10 @@ window.onload = function() {
 		requestAnimationFrame(animateTriangle);
 	    }
 	}
-	requestAnimationFrame(animateTriangle);
 
 	setTimeout(() => {
 	    addText.classList.add("fade-in");
-	    addText.style.display = "inline";
+	    addText.style.display = "inline-block";
 
 	    displayArea.classList.add("fade-in");
 	    displayArea.innerHTML = `A<sub>${n}</sub> = 
@@ -249,9 +260,9 @@ window.onload = function() {
 			   = [&pi; r<sup>2</sup> * sin(x)] / (x) <br><br>
 
 			   Taking the limit:<br>
-			   lim<sub>x &rarr; &infin;</sub> A<sub>n</sub> <br>
-			   = lim<sub>x &rarr; &infin;</sub>[&pi; r<sup>2</sup> * sin(x)] / (x) <br>
-			   = &pi; r<sup>2</sup> * lim<sub>x &rarr; &infin;</sub> sin(x) / (x) <br>
+			   lim<sub>n &rarr; &infin;</sub> A<sub>n</sub> <br>
+			   = lim<sub>x &rarr; &infin;</sub>[&pi; r<sup>2</sup> * sin(x)] / x <br>
+			   = &pi; r<sup>2</sup> * lim<sub>x &rarr; &infin;</sub> sin(x) / x <br>
 			   = &pi; r<sup>2</sup> <br><br>
 
 			   We have proved the result.`;
@@ -285,6 +296,8 @@ window.onload = function() {
 	context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
 	context.stroke();
 
+	polygonRedrawRequired = true;
+
 	let i=0; 
 	setTimeout(() => { // Allow user a moment to read associated text before beginning demonstration
 	    function animateNextPolygon() {
@@ -308,6 +321,7 @@ window.onload = function() {
 		}
 		else {
 		    addText.classList.add("fade-in");
+		    addText.style.display = "inline-block"; 
 		    intro.innerHTML = `Now let's see what happens as the number of sides <br>
 				       approaches infinity. <br><br>`;
 		    addText.innerHTML = finalAnalysis;
@@ -326,6 +340,7 @@ window.onload = function() {
 
     skipDemonstration.addEventListener("click", (event) => {
 	stopEvent = true; // Break out of animation loop in demonstration
+	polygonRedrawRequired = true;
 	skipDemonstration.disabled = true;
 	
 	// timout = duration * 3.5 is long enough for current animation to end. 
@@ -342,7 +357,6 @@ window.onload = function() {
 	    displayArea.innerHTML = "";
 	    addText.style.display = "inline-block"; 
 	    addText.classList.add("fade-in");
-
 	    intro.innerHTML = `Now let's see what happens as the number of sides <br>
 			       approaches infinity. <br><br>`;
 	    addText.innerHTML = finalAnalysis;

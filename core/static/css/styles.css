@@ -33,10 +33,6 @@ a:hover {
     font-size: 1.1em;
 }
 
-.font-style2{
-    font-family: "American Typewriter", serif;
-}
-
 /* Page structure */
 .grid-container {
   display: grid;

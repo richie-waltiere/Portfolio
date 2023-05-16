@@ -28,16 +28,15 @@ function setPrevGuess(questionNumber, guess=null) {
 
 /* Provides feedback for correct and incorrect responses to a question.
  * questionNumber: Number of the question under consideration -> int
- * checkedValue: Value selected by user -> str
+ * guess: Value selected by user -> str
  * correctAnswer: Correct value for the question under consideration -> str
- * incorrectAnswers: Incorrect values for the question under consideration -> str
  * responseElement: Element to which the response is written -> HTML Element
- * otherElements: Other elements which need modified when providing feedback -> HTML Element
+ * otherElements: Other elements that need modified when providing feedback -> HTML Element
  * otherElements should be an array of the form [{element: elmnt1 , displayStyle: displayStyle1}, 
  * {element: elmnt2, displayStyle: displayStyle2}...] 
  * displayStyle allows the function to return the element to the correct display style (block, flex, grid, etc.) */
-function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=null) {
-    const bgColor = getComputedStyle(responseElement).background;
+function questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=null) {
+    let incorrectAnswers = ['a','b','c','d'].filter((answer) => answer !== correctAnswer);
     responseElement.style.display = 'block'
 
     // Hide all other elements until correct answer given
@@ -45,19 +44,16 @@ function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrect
 	element.element.style.display = 'none'
     }
 
-    let guess;
-
     // Set prevGuess to null if it is associated with another question.
     setPrevGuess(questionNumber);
 
-    if (checkedValue === null) {
+    if (!guess) {
 	responseElement.innerHTML = '<span style="color: white">Please select an answer.</span>';
-	responseElement.scrollIntoView({behavior: 'smooth'});
+	responseElement.scrollIntoView({behavior: 'smooth', block: 'end'});
 	return;
     }
     else {
 	responseElement.innerHTML = '';
-	guess = checkedValue.value;
 	output = (guess === correctAnswer) ? '<span style="color: white">Correct!</span>' : '<span style="color: white">Not Quite. Try Again!</span>';
 	responseElement.innerHTML = output;
     }
@@ -70,6 +66,7 @@ function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrect
 	responseElement.scrollIntoView({behavior: 'smooth'});
     }
  
+    console.log(incorrectAnswers, prevGuess, guess);
     // Blink to indicate the answer is still incorrect
     if (incorrectAnswers.includes(prevGuess) && incorrectAnswers.includes(guess)) {
 	blink(responseElement, 'lightseagreen');
@@ -77,9 +74,18 @@ function questionFeedback(questionNumber, checkedValue, correctAnswer, incorrect
 
     // Ensure question and response are visible if guess is incorrect
     if (guess !== correctAnswer) {
-	responseElement.scrollIntoView({ behavior: "smooth", block: "end" });
+	responseElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
     setPrevGuess(questionNumber, guess=guess);
+}
+
+
+function retrieveGuess(name) {
+    let guess = document.querySelector(`input[name="${name}"]:checked`)
+    if (guess) {
+	return guess.value;
+    }
+    return
 }
 
 // Pigeonhole principle section:
@@ -92,14 +98,13 @@ const pigeonholePrincipleDef = document.getElementById('pigeonhole-principle-def
 
 findMatchButton.addEventListener('click', () => {
     let questionNumber = '1';
-    let checkedValue = document.querySelector('input[name="find-match"]:checked');
+    let guess = retrieveGuess("find-match");
     let correctAnswer = 'b';
-    let incorrectAnswers = ['a', 'c', 'd'];
     let responseElement = findMatchResponse;
     let otherElements = [{element: pigeonholePrincipleDef, displayStyle: 'block'}, 
 			 {element: findMatchExplanation, displayStyle: 'block'}]
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // Example 2
@@ -110,14 +115,13 @@ const cupGrid = document.getElementById('cup-grid');
 
 birthMonthButton.addEventListener('click', () => {
     let questionNumber = '2';
-    let checkedValue = document.querySelector('input[name="birthmonth"]:checked');
+    let guess = retrieveGuess("birthmonth");
     let correctAnswer = 'd';
-    let incorrectAnswers = ['a', 'b', 'c'];
     let responseElement = birthMonthResponse;
     let otherElements = [{element: birthMonthExplanation, displayStyle: 'block'}, 
 			 {element: cupGrid, displayStyle: 'grid'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // Poker section -- probability of a pair: 
@@ -129,13 +133,12 @@ const pairQ1Explanation= document.getElementById('pair-q1-explanation');
 
 pairQ1Button.addEventListener('click', () => {
     let questionNumber = '3';
-    let checkedValue = document.querySelector('input[name="pair-q1"]:checked');
+    let guess = retrieveGuess("pair-q1");
     let correctAnswer = 'c';
-    let incorrectAnswers = ['a', 'b', 'd'];
     let responseElement = pairQ1Response;
     let otherElements = [{element: pairQ1Explanation, displayStyle: 'block'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // question 2
@@ -145,13 +148,12 @@ const pairQ2Explanation= document.getElementById('pair-q2-explanation');
 
 pairQ2Button.addEventListener('click', () => {
     let questionNumber = '4';
-    let checkedValue = document.querySelector('input[name="pair-q2"]:checked');
+    let guess = retrieveGuess("pair-q2");
     let correctAnswer = 'a';
-    let incorrectAnswers = ['b', 'c', 'd'];
     let responseElement = pairQ2Response;
     let otherElements = [{element: pairQ2Explanation, displayStyle: 'block'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // question 3
@@ -161,13 +163,12 @@ const pairQ3Explanation= document.getElementById('pair-q3-explanation');
 
 pairQ3Button.addEventListener('click', () => {
     let questionNumber = '5';
-    let checkedValue = document.querySelector('input[name="pair-q3"]:checked');
+    let guess = retrieveGuess("pair-q3");
     let correctAnswer = 'b';
-    let incorrectAnswers = ['a', 'c', 'd'];
     let responseElement = pairQ3Response;
     let otherElements = [{element: pairQ3Explanation, displayStyle: 'block'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // Poker section -- probability of a two pair
@@ -177,13 +178,12 @@ const twoPairExplanation= document.getElementById('two-pair-explanation');
 
 twoPairButton.addEventListener('click', () => {
     let questionNumber = '6';
-    let checkedValue = document.querySelector('input[name="two-pair"]:checked');
+    let guess = retrieveGuess("two-pair");
     let correctAnswer = 'a';
-    let incorrectAnswers = ['b', 'c', 'd'];
     let responseElement = twoPairResponse;
     let otherElements = [{element: twoPairExplanation, displayStyle: 'block'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });
 
 // Poker section -- probability of a three of a kind
@@ -193,11 +193,10 @@ const threeOfAKindExplanation= document.getElementById('three-of-a-kind-explanat
 
 threeOfAKindButton.addEventListener('click', () => {
     let questionNumber = '7';
-    let checkedValue = document.querySelector('input[name="three-of-a-kind"]:checked');
+    let guess = retrieveGuess("three-of-a-kind");
     let correctAnswer = 'd';
-    let incorrectAnswers = ['a', 'b', 'c'];
     let responseElement = threeOfAKindResponse;
     let otherElements = [{element: threeOfAKindExplanation, displayStyle: 'block'}];
 
-    questionFeedback(questionNumber, checkedValue, correctAnswer, incorrectAnswers, responseElement, otherElements=otherElements);
+    questionFeedback(questionNumber, guess, correctAnswer, responseElement, otherElements=otherElements);
 });

@@ -86,6 +86,14 @@ body {
     border: 2px solid black;
 }
 
+.multiplication-principle-example {
+    font-size: .9rem;
+    border: 2px solid rgba(47, 79, 79, .7); 
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 90%
+}
+
 /* Poker probability section */
 #card-probabilities {
     border-top: 2px solid black;
@@ -171,6 +179,10 @@ body {
 	border: 2px solid black;
     }
 
+    #multiplication-principle-example {
+	width: 75%
+    }
+
     /* Increasing width of last column keeps grid on the */ 
     /* left-hand side of the webpage and limits width of the images */
     #cup-grid {
@@ -226,6 +238,10 @@ body {
 	margin-left: 1vw;
     }
 
+    #multiplication-principle-example {
+	width: 60%
+    }
+
     /* Poker hands template */
     #bar-chart {
 	margin-left: 20vw;
@@ -252,6 +268,10 @@ body {
 	grid-template-columns: 1fr 1fr 6fr;
 	grid-template-rows: 1fr 1fr 1fr;
 	grid-gap: 4px;
+    }
+
+    #multiplication-principle-example {
+	width: 50%
     }
 
     /* Poker hands template */

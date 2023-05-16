@@ -33,10 +33,11 @@
 		Timing of the animations.
 	    <ul>
 	        <li>
-		    Simultaneous animations could be triggered by pressing a button twice. 
-		    Animations were also difficult to stop because several loops and animations 
-		    were working together to create a single polygon, and they all had to be stopped 
-		    before the animation would stop. I solved these challenges by disabling all buttons 
+		    When implementing the "skip demonstration" button, I discovered that the animations were 
+		    difficult to stop because several loops and animations were working together to create 
+		    a single polygon. I had to track down and end all of them before the animation would stop.
+		    Simultaneous animations and other unwanted behavior could also be triggered 
+		    by pressing a button twice. I solved these challenges by disabling all buttons 
 		    during animation and by finding the right spot to break out of the loop governing 
 		    the animations instead of stopping the animations themselves.
 		</li>
@@ -78,7 +79,7 @@
 			    After confirming a correct count on the number of hands, I investigated how 
 			    a hand with a given rank might be overcounted, and found the cause: 
 			    when a card was randomly selected, it was only compared with the previous card 
-			    to check for duplicates (i.e. if a king of hearts had been drawn in the last draw 
+			    to check for duplicates (e.g. if a king of hearts had been drawn in the last draw 
 			    it should not be drawn again). It should have been compared with all 
 			    previous cards drawn. This occasionally led to duplicate cards in a hand. 
 			    Fixing this yielded a correct experimental probability.
@@ -90,24 +91,18 @@
 		    <ul>
 			<li>
 			    For each multiple-choice question I found myself repeating a lot of code 
-			    related to giving feedback to the user. I wanted to make a function 
-			    that was flexible enough to handle all the situations/questions that I needed 
-			    for the webpage. This required some ingenuity. For example: 
-			    <ul>
-				<li>
-				    If I set the value of the previous guess to 'A' and a different question 
-				    was then answered the previous guess would be associated with the wrong question. 
-				</li>
-				<li>
-				    There were often multiple elements that needed modification based 
-				    on the answer given.
-				</li>
-				<li>
-				    All display styles of the elements (block, flex, grid) needed to be tracked. 
-				</li>
+			    related to giving feedback to the user. I wanted to abstract this work
+			    into a function that was flexible enough to handle all the situations/questions 
+			    that I needed for the webpage.<br><br>
+			    This was (a little) challenging because there were often multiple elements that 
+			    needed modification based on the answer given, and 
+			    each element had to be returned to the correct display style.
+			    Once I created the function, it gave structure to and simplified 
+			    the rest of the code.<br><br>
 			</li>
 			<li>
-			    Check out the code in <a href="">GitHub</a> if you want to see the solution.
+			    <a href="https://github.com/richie-waltiere/Portfolio/blob/main/mathematics/static/js/combinatorics.js" target="_blank">Click Here</a>
+			    to see how I solved this problem.
 			</li>
 		    </ul>
 
@@ -126,6 +121,29 @@
 		</p>
 		<img src="{% static 'review.png' %}" alt="">
 	    </div>
+	</p>
+
+	<h2>Full List of Mathematics-Related Courses</h2>
+	<p>
+	    The reason I chose to study mathematics is because of its power and its depth. 
+	    It lies at the heart of most real-world applications. I have become skilled at logical thinking
+	    and problem-solving, two core skills required by any programmer. My current programming skills are 
+	    decent, and I am well aware of my shortcomings&mdash;how much there is to learn, how many skills I
+	    still need to develop. I am committed to continuous growth.<br><br>
+	    I am looking to start a career as a developer and know that&mdash;given my limited
+	    experience&mdash;you would be taking a chance on me. The following list is provided as further proof
+	    that I have the motivation and ability to succeed as a developer. I excelled in all courses.
+	    <ul>
+	        <li>Calculus II and III</li>
+		<li>Differential Equations</li>
+		<li>Real Analysis</li>
+		<li>Abstract Algebra</li>
+		<li>Linear Algebra</li>
+		<li>Discrete Math</li>
+		<li>Statistical Analysis</li>
+		<li>Mathematical Statistics I and II</li>
+		<li>Physics I and II</li>
+	    </ul>
 	</p>
 </body>
 </html>

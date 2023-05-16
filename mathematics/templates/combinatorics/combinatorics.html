@@ -59,19 +59,19 @@
 	    If there are n items and m containers, with n &gt; m, then at least one container contains two items.
 	</div>
 	<div class="no-display top-margin" id="find-match-explanation">
-	    Suppose we have 2 containers, one labeled black and the other white. 
+	    Suppose we have 2 containers&mdash;one labeled black and the other white. 
 	    When we pull a black sock from the drawer, it will go in the container labeled black 
 	    and a white sock will go into the container labeled white. <br><br>
 	    Suppose further that the first selection is black and the second is white. 
 	    Each container now contains a sock. If the third selection is black, 
-	    we have two black socks and one container (black), forcing a pair in that container. 
+	    we have two black socks and one black container, forcing a pair in that container. 
 	    A white sock would also force a pair in the white container.<br>
 	    <img src="{% static 'images/find_match.png' %}" alt="Two Black Socks, One White." id="sock-image" >
 	</div>
 	<h3>Example 2:</h3>
 	<p>
 	    Eddy is in a room with 13 co-workers. Having recently learned the pigeonhole principle, 
-	    he smugly informs one of them, Benjamin, that at least one of his co-workers must share the same 
+	    he smugly informs one of them, Benjamin, that at least one of their co-workers must share the same 
 	    birthday month as himself &mdash; February.<br><br>
 	    Benjamin kindly informs him that he is mistaken. Eddy chuckles at the ignorance of his co-worker 
 	    and light-heartedly calls everyone over. He takes a poll of all thirteen of his coworkers. 
@@ -105,14 +105,14 @@
 	<div class="no-display" id="birthmonth-explanation">
 	    Benjamin walks over the cabinet, pulls out 12 coffee cups and thirteen spoons and 
 	    places them in front of Eddy. <br><br>
-	    "That's a common mistake. See these coffee cups? If each of these cups represents a different 
-	    month of the year and each of these spoons represents one of the people in this room, 
-	    then we can place a spoon in a given cup if that person was born 
+	    "That's a common mistake. See these coffee cups? Let each of them represent a different 
+	    month of the year and each of these spoons represent one of the people in this room. 
+	    Then we can place a spoon in one of the cups if that person was born 
 	    in the month represented by the cup. <br><br>
 	    For arguments sake, suppose everyone except me has a different birth month. 
-	    That means one spoon will be distributed to each cup. My birthday is in October. 
-	    The October cup will be the only one that contains two spoons. 
-	    February&mdash;your birth month&mdash;still contains you alone. Make sense?"<br><br>
+	    That means one spoon will be distributed to each cup. My birthday is in October; 
+	    the October cup will be the only one that contains two spoons. 
+	    February&mdash;your birth month&mdash;still contains just you. Make sense?"<br><br>
 	    Eddy nodded slightly and grumbled something about it being Tuesday today and not Monday.<br>
 	</div>
 	<div class="top-margin" id="cup-grid" style="display: none">
@@ -138,25 +138,38 @@
 	    in a poker game. <br><br>
 	    Experiment with these probabilities &rarr; 
 	    <a href="{% url 'poker-hands' %}" target="_blank">here</a> &larr; before continuing.<br><br>
-	    We'll use a standard 52-card deck (no Jokers).<br>
+	    We'll use a standard 52-card deck.<br>
 	    Here are a few more concepts we'll need to analyze these problems completely: 
 	</p>
 	<div class="definition">
 	    <strong style="text-decoration: underline">Combinations</strong><br>
 	    The number of possible ways to choose k items from a group of size n is given by the equation:<br><br>
-	    C(n,k) = n!/((n-k)!*k!)<br><br>
-	    where C(n,k) is read as "n choose k"&mdash;the number of unique combinations possible 
-	    if items are chosen k at a time from a group of size n&mdash;and n! = n*(n-1)*(n-2)...*2*1 
-	    is read "n factorial" (e.g. 5! = 5*4*3*2*1 = 120).<br><br>
+	    <span style="padding-left: 20vw">C(n,k) = n! / ((n-k)! * k!)</span><br><br>
+	    C(n,k) is read as "n choose k" and is defined as the number of unique combinations possible 
+	    if items are chosen k at a time from a group of size n. <br><br>
+	    n! is read "n factorial" and is defined as:<br>
+	    n! = n * (n-1) * (n-2) * &middot;&middot;&middot; * 2 * 1<br>
+	    (<strong style="font-size: .9rem">Example:</strong> 5! = 5*4*3*2*1 = 120)<br><br>
 	    The order of the items does not matter in a combination:<br> 
 	    {1,2,3} is the same as {3,2,1}<br><br>
+	    <!-- &nbsp; used to prevent word wrap of phrases -->
+	    <div class="multiplication-principle-example">
+		<strong>Example</strong><br>
+		Given 4 playing cards&mdash;all of the same value: King&mdash;
+		it&nbsp;is&nbsp;possible&nbsp;to&nbsp;form<br>
+		C(4,2) = 4! / ((4-2)! * 2!) = (4*3*2*1)&nbsp;/&nbsp;((2*1)&nbsp;*&nbsp;(2*1))&nbsp;= 6 unique pairs
+		from the four Kings.<br>
+	    </div><br>
 	    <strong style="text-decoration: underline">Multiplication Principle</strong><br>
 	    The multiplication principle states:<br><br>
 	    If there are N<sub>1</sub> items in set 1 and N<sub>2</sub> items in set 2, 
 	    then there are N<sub>1</sub>* N<sub>2</sub> ways to combine the items from set 1 and set 2. <br><br>
-	    (e.g. given 3 subjects, 4 verbs, and 8 predicates, there are 3 * 4 * 8 = 96 unique sentences 
-	    that can be formed, assuming only one sentence part can be chosen from each category 
-	    for any given sentence.)
+	    <div class="multiplication-principle-example">
+		<strong>Example</strong><br>
+		Given 3 subjects, 4 verbs, and 8 predicates, there are 3 * 4 * 8 = 96 unique sentences 
+		that can be formed, assuming a sentence order of subject-verb-predicate and only one sentence part 
+		is chosen from each category for any given sentence.
+	    </div>
 	</div>
 	<p>
 	    The number of possible 5-card hands is given by the equation:<br><br>
@@ -193,7 +206,7 @@
 	    For any given card value, there are four suits. These suits can be paired up in C(4,2) = 6 ways.<br><br>
 	    There are 13 card values; each of these has 6 possible pairs. The total number 
 	    of pairs possible in a 52-card deck is:<br><br>
-	    C(4,2) * C(13,1) = 6 * 13 = 78 pairs<br>
+	    C(13,1) * C(4,2) = 13 * 6 = 78 pairs<br>
 	</div>
 	
 	<div class="top-margin" id="pair-q2">
@@ -226,12 +239,12 @@
 	    Since a three-of-a-kind is not allowed, the other two cards of the same value as the pair cannot be used. 
 	    That leaves 12 remaining card values.<br><br>
 	    There are C(12,3) ways to choose 3 (unique) values from the 12. 
-	    Each of these values has 4 possible suits. This multiplies every combination of 
+	    Each of these values has C(4,1) = 4 possible suits. This multiplies every combination of 
 	    3 card-values by 4*4*4 = 64 (multiplication principle). 
 	    For example, {3, J, K} is not one combination but 64, 
 	    corresponding to { {3 Spades, J Spades, K Spades}, {3 Spades, J Spades, K Hearts}, ... }.<br><br> 
 	    The total number of 3-card combinations given that a pair has already been chosen is:<br><br>
-	    C(12,3) * 4 * 4 * 4 = 220 * 64 = 14,080 combinations
+	    C(12,3) * C(4,1) * C(4,1) * C(4,1) = 220 * 64 = 14,080 combinations
 	</div>
 
 	<div id="pair-q3">
@@ -298,13 +311,14 @@
 	    </div>
 	    <div class="no-display" id="two-pair-explanation">
 		There are C(13,2) = 78 ways to choose two values from the thirteen. Each value has C(4,2) = 6
-		pairs possible (so we must multiply by C(4,2) twice). The number of two-pairs possible is:<br><br>
+		pairs possible (so we will multiply by C(4,2) twice). The number of two-pairs possible is:<br><br>
 		C(13,2) * C(4,2) * C(4,2) = 78 * 6 * 6 = 2808 two-pairs. <br><br>
-		The number of ways to choose the last card from the remaining card values (which&mdash;to avoid the formation
-		of other hands like a full-house&mdash;must be chose from the values not yet used) is:<br><br>
+		To avoid the formation of other hands like a full house, the last card must be chosen
+		from the values not yet used. The number of ways to choose this card from 
+		the remaining values is:<br><br>
 		(# of remaining values) * (# of suits) = C(11,1) * C(4,1) = 11 * 4 = 44<br><br>
 
-		The number of hands with a two-pair is:<br><br>
+		By the multiplication principle, the number of hands with a two-pair is:<br><br>
 		C(13,2) * C(4,2) * C(4,2) * C(11,1) * C(4,1) = 78 * 6 * 6 * 11 * 4 = 123,352 hands<br><br>
 		Therefore, the probability of a two-pair is: <br><br>
 		(123,352 hands with a two-pair) / (2,598,960 hands) &approx; <strong>.048</strong>
@@ -313,6 +327,7 @@
 
 	<h3>Calculating the Probability of a Three-of-a-Kind</h3>
 	Last one.<br><br>
+	Remember to use the results of the experiment page to confirm your calculations.<br><br>
 	<div id="three-of-a-kind">
 	    <div id="three-of-a-kind-probability">
 	    The probability of a three-of-a-kind is:<br><br>
